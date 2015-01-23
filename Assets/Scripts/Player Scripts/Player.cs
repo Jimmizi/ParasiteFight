@@ -37,9 +37,6 @@ public class Player : MonoBehaviour {
             RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up,1);
             if (hit.collider != null)
             {
-                Debug.DrawRay(transform.position, -Vector2.up, Color.red);
-                float distance = Mathf.Abs(hit.point.y - transform.position.y);
-
                 this.rigidbody2D.AddForce(new Vector2(0, jumpForce));
                 jumpLimitTimer = 0;
             }

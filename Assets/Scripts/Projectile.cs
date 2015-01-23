@@ -32,13 +32,25 @@ public class Projectile : MonoBehaviour {
 
         if (projectileType == Type.GRENADE)
         {
-            this.rigidbody2D.AddTorque(Random.Range(-300,300));
+            this.rigidbody2D.AddTorque(Random.Range(0,300));
             StartCoroutine("GrenadeExplode");
         }
     }
 
     void OnCollisionEnter2D(Collision2D col)
     {
+        if (projectileType == Type.GRENADE)
+        {
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right, 1);
+            if (hit.collider != null)
+            {
+                Debug.DrawRay(transform.position, Vector2.right, Color.cyan);
+                //Debug.Break();
+                Debug.Log(this.rigidbody2D.velocity.x);
+                this.rigidbody2D.AddForce(new Vector2(-100, 0));
+            }
+        }
+
         if (projectileType == Type.BULLET)
         {
             Destroy(this.gameObject);
