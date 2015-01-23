@@ -48,11 +48,14 @@
   <ItemGroup>
      <Compile Include="Assets\Code Snippets\tex2d changing.cs" />
      <Compile Include="Assets\Scripts\CameraControl.cs" />
+     <Compile Include="Assets\Scripts\Clickspawn.cs" />
      <Compile Include="Assets\Scripts\GUI\MenuControl.cs" />
      <Compile Include="Assets\Scripts\MathHelper.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\Player.cs" />
      <Compile Include="Assets\Scripts\PlayerControl.cs" />
      <Compile Include="Assets\Scripts\Projectile.cs" />
+     <Compile Include="Assets\Scripts\Water.cs" />
+     <Compile Include="Assets\Scripts\WaterDetector.cs" />
      <Compile Include="Assets\Scripts\Weapon.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
