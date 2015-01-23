@@ -9,6 +9,8 @@ public class Projectile : MonoBehaviour {
 
     public ParticleSystem ProjectileHit;
 
+    float yDrag = 0;
+
     //copy the sprite
     public void Initialise(Sprite spr, string pType)
     {
@@ -41,14 +43,24 @@ public class Projectile : MonoBehaviour {
     {
         if (projectileType == Type.GRENADE)
         {
+            //right bounce
             RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right, 1);
             if (hit.collider != null)
-            {
-                Debug.DrawRay(transform.position, Vector2.right, Color.cyan);
-                //Debug.Break();
-                Debug.Log(this.rigidbody2D.velocity.x);
                 this.rigidbody2D.AddForce(new Vector2(-100, 0));
+
+            hit = Physics2D.Raycast(transform.position, -Vector2.right, 1);
+            if (hit.collider != null)
+                this.rigidbody2D.AddForce(new Vector2(100, 0));
+
+            hit = Physics2D.Raycast(transform.position, -Vector2.up, 1);
+            if (hit.collider != null)
+            {
+                this.rigidbody2D.AddForce(new Vector2(0, 100 - yDrag));
+
+                if (yDrag < 100)
+                    yDrag += 25;
             }
+
         }
 
         if (projectileType == Type.BULLET)
