@@ -12,10 +12,10 @@ TagManager:
   Builtin Layer 5: UI
   Builtin Layer 6: 
   Builtin Layer 7: 
-  User Layer 8: 
-  User Layer 9: 
-  User Layer 10: 
-  User Layer 11: 
+  User Layer 8: FarBG
+  User Layer 9: BGDecor
+  User Layer 10: Play
+  User Layer 11: FGDecor
   User Layer 12: 
   User Layer 13: 
   User Layer 14: 
@@ -40,4 +40,20 @@ TagManager:
   - name: Default
     userID: 0
     uniqueID: 0
+    locked: 0
+  - name: BGFar
+    userID: 1
+    uniqueID: 1760789361
+    locked: 0
+  - name: BGDecor
+    userID: 2
+    uniqueID: 464208441
+    locked: 0
+  - name: Play
+    userID: 3
+    uniqueID: 409007395
+    locked: 0
+  - name: FGDecor
+    userID: 4
+    uniqueID: 647050955
     locked: 0
