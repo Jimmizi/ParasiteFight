@@ -10,6 +10,7 @@ public class Weapon : MonoBehaviour {
 
     public Sprite WeaponTexture;
     public Sprite ProjectileTexture;
+    public Sprite GrenadeTexture;
 
     public GameObject ProjectilePrefab;
 
