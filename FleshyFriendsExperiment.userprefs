@@ -1,14 +1,13 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Water.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Player Scripts/Player.cs">
     <Files>
-      <File FileName="Assets/Scripts/Water.cs" Line="132" Column="1" />
-      <File FileName="Assets/Scripts/WaterDetector.cs" Line="10" Column="1" />
+      <File FileName="Assets/Scripts/Player Scripts/Player.cs" Line="96" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="/Users/Andy/FleshyFriendsExperiment/Assets/Scripts/Water.cs" line="132" />
+      <Breakpoint file="/Users/Andy/FleshyFriendsExperiment/Assets/Scripts/Water.cs" line="133" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
