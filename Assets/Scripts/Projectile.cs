@@ -31,7 +31,10 @@ public class Projectile : MonoBehaviour {
         this.rigidbody2D.AddForce(dir * force);
 
         if (projectileType == Type.GRENADE)
+        {
+            this.rigidbody2D.AddTorque(Random.Range(-300,300));
             StartCoroutine("GrenadeExplode");
+        }
     }
 
     void OnCollisionEnter2D(Collision2D col)
