@@ -1,10 +1,10 @@
--debug
 -target:library
 -nowarn:0169
 -out:'Temp/Assembly-CSharp.dll'
+-debug
 -r:'/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEngine.dll'
 -r:'/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEditor.dll'
--define:UNITY_4_5_4
+-define:UNITY_4_5_3
 -define:UNITY_4_5
 -define:UNITY_STANDALONE_WIN
 -define:ENABLE_MICROPHONE
@@ -46,6 +46,7 @@
 'Assets/Scripts/Player Scripts/Player.cs'
 'Assets/Scripts/PlayerControl.cs'
 'Assets/Scripts/Projectile.cs'
+'Assets/Scripts/Terrain.cs'
 'Assets/Scripts/Water.cs'
 'Assets/Scripts/WaterDetector.cs'
 'Assets/Scripts/Weapon.cs'
