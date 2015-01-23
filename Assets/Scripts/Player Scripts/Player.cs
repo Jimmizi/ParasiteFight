@@ -42,9 +42,6 @@ public class Player : MonoBehaviour {
                 this.rigidbody2D.AddForce(new Vector2(0, jumpForce));
                 jumpLimitTimer = 0;
             }
-
-            
-
         }
 
         //Shoot
