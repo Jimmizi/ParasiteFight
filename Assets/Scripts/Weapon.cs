@@ -13,26 +13,16 @@ public class Weapon : MonoBehaviour {
 
     public GameObject ProjectilePrefab;
 
-	void Start () 
-	{
-        weaponSpeed = 300;
-	}
-
-	void Update () 
+    public void Shoot(float angle)
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Shoot();
-        }
-	}
-
-    void Shoot()
-    {
-        GameObject go = (GameObject)Instantiate(ProjectilePrefab, this.transform.position, Quaternion.identity);
+        GameObject go = (GameObject)Instantiate(ProjectilePrefab, this.transform.position + new Vector3(0,1,0), Quaternion.identity);
         go.GetComponent<Projectile>().Initialise(ProjectileTexture);
         go.AddComponent<PolygonCollider2D>();
 
-        go.GetComponent<Projectile>().Shoot(45, weaponSpeed);
+        go.GetComponent<Projectile>().Shoot(angle, weaponSpeed);
     }
 
+    Sprite spr;
+
+   
 }

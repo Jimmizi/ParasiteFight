@@ -15,6 +15,7 @@ public class Projectile : MonoBehaviour {
     {
         Vector3 dir = Quaternion.AngleAxis(angle, Vector3.forward) * Vector3.right;
         this.rigidbody2D.AddForce(dir * force);
+        Debug.Log("ADDIING VELOCITY");
     }
 
     void OnCollisionEnter2D(Collision2D col)
