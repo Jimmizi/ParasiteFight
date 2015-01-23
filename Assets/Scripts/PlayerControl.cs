@@ -2,14 +2,18 @@
 using UnityEngine;
 using System.Collections;
 using System.Runtime.Remoting.Messaging;
+using System.Threading;
 
 public class PlayerControl : MonoBehaviour
 {
     public float Mass = 1.0f;
     public float DragCoefficient = -10.0f;
 
+    private bool m_isAllowJump = false;
     private const float MAX_FORCE = 10.0f;
     private const float MAX_SPEED = 10.0f;
+
+    private float m_timer = 0.0f;
 
     private Vector3 m_force = Vector2.zero;
     private Vector3 m_acceleration = Vector2.zero;
@@ -26,9 +30,34 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        m_force = Movement();
-        m_velocity = PhysicsTick(m_force);
-        transform.position = transform.position + m_velocity * Time.deltaTime;
+        if(Input.GetKey(KeyCode.D))
+            rigidbody2D.AddForce(new Vector2(10.0f, 0.0f));
+        else if(Input.GetKey(KeyCode.A))
+            rigidbody2D.AddForce(new Vector2(-10.0f, 0.0f));
+
+        // If player's velocity is not going in Y, allow 
+        if (rigidbody2D.velocity.y < 10.0f)
+        {
+            if (m_isAllowJump)
+            {
+                if (Input.GetKey(KeyCode.Space))
+                {
+                    rigidbody2D.AddForce(new Vector2(0.0f, 50.0f));
+                }
+            }
+        }
+        
+        // Do check of height
+        if(rigidbody2D.velocity.y > 9.9999f)
+        {
+            m_isAllowJump = false;
+        }
+        if (rigidbody2D.velocity.y == 0.0f)
+        {
+            m_isAllowJump = true;
+        }
+
+        Debug.Log("Velocity-Y: " + rigidbody2D.velocity.y);
     }
 
 
@@ -51,10 +80,15 @@ public class PlayerControl : MonoBehaviour
     {
         // Calculate forces
         force = Vector3.ClampMagnitude(force, MAX_FORCE);
+
+        // Calculate drag
         Vector3 drag = -DragCoefficient * m_velocity;
 
+        // Calculate gravity
+        Vector3 gravity = Physics.gravity;
+
         // Calculate final force
-        Vector3 resultantForce = force + drag;
+        Vector3 resultantForce = force + drag + gravity;
 
         // Calculate acceleration
         m_acceleration = resultantForce / Mass;
