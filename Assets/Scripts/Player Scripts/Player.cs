@@ -31,7 +31,7 @@ public class Player : MonoBehaviour {
         velocity.x = Input.GetAxis("C" + playerNumber + " Horizontal") * playerSpeed * Time.deltaTime;
         this.transform.position += new Vector3(velocity.x, 0, 0);
 
-        //jump
+        //jump                         
         if (PressedRB() && jumpLimitTimer > 0.2f)
         {
             RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up,1);
