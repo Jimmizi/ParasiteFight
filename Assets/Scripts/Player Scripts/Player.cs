@@ -15,6 +15,7 @@ public class Player : MonoBehaviour {
     private Weapon playerWeapon = new Weapon();
 
     private float jumpLimitTimer = 0;
+    private bool shot;
 	
 	void Start () 
     {
@@ -30,8 +31,8 @@ public class Player : MonoBehaviour {
         velocity.x = Input.GetAxis("C" + playerNumber + " Horizontal") * playerSpeed * Time.deltaTime;
         this.transform.position += new Vector3(velocity.x, 0, 0);
 
-        //jump
-        if (PressedA() && jumpLimitTimer > 0.2f)
+        //jump                         
+        if (PressedRB() && jumpLimitTimer > 0.2f)
         {
             RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up,1);
             if (hit.collider != null)
@@ -42,24 +43,38 @@ public class Player : MonoBehaviour {
                 this.rigidbody2D.AddForce(new Vector2(0, jumpForce));
                 jumpLimitTimer = 0;
             }
-
-            
-
         }
 
         //Shoot
-        if (PressedB())
+        if (PressedRT())
         {
-            float angle = Mathf.Atan2(Input.GetAxis("C" + playerNumber + " Vertical"),
-                                      Input.GetAxis("C" + playerNumber + " Horizontal")) * 180 / Mathf.PI;
+            if(!shot)
+            {
+                float angle = Mathf.Atan2(Input.GetAxis("C" + playerNumber + " Vertical R"),
+                                          Input.GetAxis("C" + playerNumber + " Horizontal R")) * 180 / Mathf.PI;
 
-            WeaponPrefab.GetComponent<Weapon>().Shoot(angle, this.transform.position);
+                WeaponPrefab.GetComponent<Weapon>().Shoot(angle, this.transform.position);
+
+                shot = true;
+            }
+        }
+        else
+        {
+            shot = false;
         }
 
         
 	}
 
+    bool PressedRB()
+    {
+        return Input.GetButtonDown("C" + playerNumber + " RB");
+    }
 
+    bool PressedRT()
+    {
+        return Input.GetAxis("C" + playerNumber + " RT") > 0.5f ? true : false;
+    }
 
     bool PressedA()
     {
