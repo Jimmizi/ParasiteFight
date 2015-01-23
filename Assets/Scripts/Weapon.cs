@@ -13,9 +13,9 @@ public class Weapon : MonoBehaviour {
 
     public GameObject ProjectilePrefab;
 
-    public void Shoot(float angle)
+    public void Shoot(float angle, Vector3 pos)
     {
-        GameObject go = (GameObject)Instantiate(ProjectilePrefab, this.transform.position + new Vector3(0,1,0), Quaternion.identity);
+        GameObject go = (GameObject)Instantiate(ProjectilePrefab, pos + new Vector3(0,1,0), Quaternion.identity);
         go.GetComponent<Projectile>().Initialise(ProjectileTexture);
         go.AddComponent<PolygonCollider2D>();
 

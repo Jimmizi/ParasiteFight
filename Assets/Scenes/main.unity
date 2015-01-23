@@ -218,7 +218,7 @@ GameObject:
   - 114: {fileID: 996686374}
   - 50: {fileID: 996686373}
   - 61: {fileID: 996686372}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -248,7 +248,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: .0500000007
   m_GravityScale: 1
-  m_FixedAngle: 0
+  m_FixedAngle: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -267,7 +267,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerNumber: 1
   playerHealth: 0
-  playerSpeed: 0
+  playerSpeed: 4
+  jumpForce: 300
   PlayerTexture: {fileID: 0}
   WeaponPrefab: {fileID: 100000, guid: f3700e15a1feeff49838c8a65b0c0133, type: 2}
 --- !u!212 &996686375
@@ -368,6 +369,22 @@ Prefab:
       propertyPath: WeaponPrefab
       value: 
       objectReference: {fileID: 100000, guid: f3700e15a1feeff49838c8a65b0c0133, type: 2}
+    - target: {fileID: 11400000, guid: d9bf6c015055e394c899ab0f7f4baa2e, type: 2}
+      propertyPath: jumpForce
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 5000000, guid: d9bf6c015055e394c899ab0f7f4baa2e, type: 2}
+      propertyPath: m_FixedAngle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: d9bf6c015055e394c899ab0f7f4baa2e, type: 2}
+      propertyPath: playerSpeed
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: d9bf6c015055e394c899ab0f7f4baa2e, type: 2}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d9bf6c015055e394c899ab0f7f4baa2e, type: 2}
   m_RootGameObject: {fileID: 996686371}
