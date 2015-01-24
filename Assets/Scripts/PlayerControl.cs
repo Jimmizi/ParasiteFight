@@ -48,6 +48,10 @@ public class PlayerControl : MonoBehaviour
 
     float grenadeTimer, gunTimer, rocketTimer = 0;
 
+    float shootAniTimer = 0;
+
+    public GameObject Head, Body;
+
     // Use this for initialization
     void Start()
     {
@@ -65,11 +69,12 @@ public class PlayerControl : MonoBehaviour
 
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         grenadeTimer += Time.deltaTime;
         rocketTimer += Time.deltaTime;
         gunTimer += Time.deltaTime;
+        shootAniTimer += Time.deltaTime;
 
         if (playerHealth <= 0)
         {
@@ -91,12 +96,19 @@ public class PlayerControl : MonoBehaviour
             goingRight = false;
 
         if (goingRight)
-            this.transform.localScale = new Vector3(1, 1, 1);
+        {
+            Head.transform.localScale = new Vector3(1, 1, 1);
+            Body.transform.localScale = new Vector3(1, 1, 1);
+
+        }
         else
-            this.transform.localScale = new Vector3(-1, 1, 1);
+        {
+            Head.transform.localScale = new Vector3(-1, 1, 1);
+            Body.transform.localScale = new Vector3(-1, 1, 1);
+        }
 
 
-        if (PressedRB() && jumpLimitTimer > 1)
+        if (PressedA() && jumpLimitTimer > 1)
         {
             if (m_velocity.y < 0.01f && m_velocity.y > -0.01f)
             {
@@ -110,7 +122,7 @@ public class PlayerControl : MonoBehaviour
             }
         }
 
-        if (PressedA())
+        if (PressedB())
         {
             if (weapon == 0)
                 weapon = 1;
@@ -139,7 +151,7 @@ public class PlayerControl : MonoBehaviour
         }
 
         //Shoot
-        if (PressedRT())
+        if (PressedRB())
         {
             if (weapon == 0)
             {
@@ -172,8 +184,8 @@ public class PlayerControl : MonoBehaviour
                 float angle = Mathf.Atan2(Input.GetAxis("C" + playerNumber + " Vertical R"),
                                           Input.GetAxis("C" + playerNumber + " Horizontal R")) * 180 / Mathf.PI;
 
+                WeaponPrefabs[weapon].GetComponent<Weapon>().Shoot(angle, BulletSlot.transform.position,weapon, this.rigidbody2D.velocity);
 
-                WeaponPrefabs[weapon].GetComponent<Weapon>().Shoot(angle, BulletSlot.transform.position,weapon);
 
                 shot = true;
             }
@@ -212,6 +224,7 @@ public class PlayerControl : MonoBehaviour
     public void DamagePlayer(int amount)
     {
         playerHealth -= amount;
+        StartCoroutine("TakeDamage");
     }
 
     bool PressedRB()
@@ -241,6 +254,54 @@ public class PlayerControl : MonoBehaviour
         return Input.GetButtonDown("C" + playerNumber + " X");
     }
 
+    IEnumerator TakeDamage()
+    {
+        float timer = 0;
+
+        this.GetComponentInChildren<SpriteRenderer>().color = Color.red;
+        while (timer < 0.1f)
+        {
+            timer += Time.deltaTime;
+
+            if(timer > 0.05f)
+                this.GetComponentInChildren<SpriteRenderer>().color = Color.white;
+
+            yield return null;
+        }
+
+        this.GetComponentInChildren<SpriteRenderer>().color = Color.red;
+        while (timer < 0.2f)
+        {
+            timer += Time.deltaTime;
+
+            if (timer > 0.15f)
+                this.GetComponentInChildren<SpriteRenderer>().color = Color.white;
+
+            yield return null;
+        }
+
+        this.GetComponentInChildren<SpriteRenderer>().color = Color.red;
+        while (timer < 0.3f)
+        {
+            timer += Time.deltaTime;
+
+            if (timer > 0.25f)
+                this.GetComponentInChildren<SpriteRenderer>().color = Color.white;
+
+            yield return null;
+        }
+
+        this.GetComponentInChildren<SpriteRenderer>().color = Color.red;
+        while (timer < 0.4f)
+        {
+            timer += Time.deltaTime;
+
+            if (timer > 0.35f)
+                this.GetComponentInChildren<SpriteRenderer>().color = Color.white;
+
+            yield return null;
+        }
+    }
 
     //Vector3 PhysicsTick(Vector3 force)
     //{

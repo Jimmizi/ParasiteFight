@@ -43,7 +43,9 @@ public class CameraControl : MonoBehaviour
         avgPosition /= alive;
         distances /= 15;
 
-        avgPosition.z = -10 - distances;
+        avgPosition.z = -10;// -distances;
+
+        this.camera.orthographicSize = 10 + distances / 2;
 
         this.transform.position = Vector3.Lerp(this.transform.position, avgPosition + offset, Time.deltaTime * 3);
     }
