@@ -55,6 +55,7 @@
      <Compile Include="Assets\Scripts\PlayerControl.cs" />
      <Compile Include="Assets\Scripts\Projectile.cs" />
      <Compile Include="Assets\Scripts\Terrain.cs" />
+     <Compile Include="Assets\Scripts\Terrain\TerrainTest.cs" />
      <Compile Include="Assets\Scripts\Water.cs" />
      <Compile Include="Assets\Scripts\WaterDetector.cs" />
      <Compile Include="Assets\Scripts\Weapon.cs" />
