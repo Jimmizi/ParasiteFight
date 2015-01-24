@@ -2,7 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class GameplayManager : MonoBehaviour {
+public class GameplayManager : MonoBehaviour
+{
 
     public GameObject PlayerPrefab;
     public GameObject camera;
@@ -17,7 +18,7 @@ public class GameplayManager : MonoBehaviour {
 
     int deadCount = 0;
 
-	void Start () 
+    void Start()
     {
         winText.enabled = false;
         scores = new int[4];
@@ -29,7 +30,7 @@ public class GameplayManager : MonoBehaviour {
         }
 
         SpawnPlayers();
-	}
+    }
 
     void SpawnPlayers()
     {
@@ -85,11 +86,11 @@ public class GameplayManager : MonoBehaviour {
         deadCount = 0;
     }
 
-    void Update() 
+    void Update()
     {
         if (deadCount >= 3)
             RoundEnd();
-	}
+    }
 
     IEnumerator BackToMenu()
     {

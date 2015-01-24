@@ -53,13 +53,13 @@ public class PlayerControl : MonoBehaviour
     public GameObject Head, Body;
     public ParticleSystem blood;
 
-	private AudioSource source;
-	public AudioClip[] clip;
+    private AudioSource source;
+    public AudioClip[] clip;
 
-	void Awake()
-	{
-		source = GetComponent<AudioSource> ();
-	}
+    void Awake()
+    {
+        source = GetComponent<AudioSource>();
+    }
 
     // Use this for initialization
     void Start()
@@ -80,9 +80,10 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-		for (int i = 0; i < clip.Length; i++) {
-						audio.clip = clip [i];
-				}
+        for (int i = 0; i < clip.Length; i++)
+        {
+            audio.clip = clip[i];
+        }
 
         grenadeTimer += Time.deltaTime;
         rocketTimer += Time.deltaTime;
@@ -157,27 +158,28 @@ public class PlayerControl : MonoBehaviour
             GunSlot.GetComponent<SpriteRenderer>().sprite = WeaponPrefabs[weapon].GetComponent<Weapon>().WeaponTexture;
         }
 
-        if(Input.GetAxis("C" + playerNumber + " Vertical R") != 0 || Input.GetAxis("C" + playerNumber + " Horizontal R") != 0)
+        if (Input.GetAxis("C" + playerNumber + " Vertical R") != 0 || Input.GetAxis("C" + playerNumber + " Horizontal R") != 0)
         {
             float angle = Mathf.Atan2(Input.GetAxis("C" + playerNumber + " Vertical R"),
                                           Input.GetAxis("C" + playerNumber + " Horizontal R")) * 180 / Mathf.PI;
 
             Quaternion rot = GunSlot.transform.rotation;
 
-            if(goingRight)
+            if (goingRight)
                 rot.eulerAngles = new Vector3(rot.eulerAngles.x, rot.eulerAngles.y, angle);
             else
                 rot.eulerAngles = -new Vector3(rot.eulerAngles.x, rot.eulerAngles.y, -angle);
-            
-           GunSlot.transform.localRotation = rot;
+
+            GunSlot.transform.localRotation = rot;
         }
 
         //VIN-DEBUG:
-        if (Input.GetKeyDown (KeyCode.F)) {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
 
-			playerHealth = 0;
-			audio.PlayOneShot(clip[0]);
-		}
+            playerHealth = 0;
+            audio.PlayOneShot(clip[0]);
+        }
 
         //Shoot
         if (PressedRB())
@@ -212,7 +214,7 @@ public class PlayerControl : MonoBehaviour
                 float angle = Mathf.Atan2(Input.GetAxis("C" + playerNumber + " Vertical R"),
                                           Input.GetAxis("C" + playerNumber + " Horizontal R")) * 180 / Mathf.PI;
 
-                WeaponPrefabs[weapon].GetComponent<Weapon>().Shoot(angle, BulletSlot.transform.position,weapon, this.rigidbody2D.velocity);
+                WeaponPrefabs[weapon].GetComponent<Weapon>().Shoot(angle, BulletSlot.transform.position, weapon, this.rigidbody2D.velocity);
 
 
                 shot = true;
@@ -222,7 +224,7 @@ public class PlayerControl : MonoBehaviour
         {
             shot = false;
         }
-        
+
         // Do check of height
         //if(rigidbody2D.velocity.y > 5.9999f)
         //    m_isAllowJump = false;
@@ -291,7 +293,7 @@ public class PlayerControl : MonoBehaviour
         {
             timer += Time.deltaTime;
 
-            if(timer > 0.05f)
+            if (timer > 0.05f)
                 this.GetComponentInChildren<SpriteRenderer>().color = Color.white;
 
             yield return null;
