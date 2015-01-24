@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Player : MonoBehaviour {
+
+    public static List<GameObject> PlayerList;
 
     public int playerNumber;
 
@@ -10,7 +13,7 @@ public class Player : MonoBehaviour {
     public float jumpForce;
 
     public Sprite PlayerTexture;
-    public GameObject WeaponPrefab;
+    public List<GameObject> WeaponPrefabs;
 
     private Weapon playerWeapon = new Weapon();
 
@@ -19,13 +22,20 @@ public class Player : MonoBehaviour {
 	
 	void Start () 
     {
-        playerWeapon = WeaponPrefab.GetComponent<Weapon>();
+        if(PlayerList == null)
+            PlayerList = new List<GameObject>();
+
+        PlayerList.Add(this.gameObject);
+        playerWeapon = WeaponPrefabs[0].GetComponent<Weapon>();
 	}
 	
 	void Update () 
     {
         Vector3 velocity = new Vector3(0, 0, 0);
         jumpLimitTimer += Time.deltaTime;
+
+        if (playerHealth <= 0)
+            Debug.Break();
 
         //vertical moving
         velocity.x = Input.GetAxis("C" + playerNumber + " Horizontal") * playerSpeed * Time.deltaTime;
@@ -50,7 +60,7 @@ public class Player : MonoBehaviour {
                 float angle = Mathf.Atan2(Input.GetAxis("C" + playerNumber + " Vertical R"),
                                           Input.GetAxis("C" + playerNumber + " Horizontal R")) * 180 / Mathf.PI;
 
-                WeaponPrefab.GetComponent<Weapon>().Shoot(angle, this.transform.position);
+                WeaponPrefabs[0].GetComponent<Weapon>().Shoot(angle, this.transform.position);
 
                 shot = true;
             }
@@ -62,6 +72,11 @@ public class Player : MonoBehaviour {
 
         
 	}
+
+    public void DamagePlayer(int amount)
+    {
+        playerHealth -= amount;
+    }
 
     bool PressedRB()
     {

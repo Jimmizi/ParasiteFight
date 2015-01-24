@@ -46,7 +46,7 @@ public class Water : MonoBehaviour {
 	}
 	
 	
-	public void Splash(float xpos, float velocity)
+	public void Splash(float xpos, float velocity, bool doSplash = true)
 	{
 		//If the position is within the bounds of the water:
 		if (xpos >= xpositions[0] && xpos <= xpositions[xpositions.Length-1])
@@ -75,8 +75,11 @@ public class Water : MonoBehaviour {
 			Quaternion rotation = Quaternion.LookRotation(new Vector3(xpositions[Mathf.FloorToInt(xpositions.Length / 2)], baseheight + 8, 5) - position);
 			
 			//Create the splash and tell it to destroy itself.
-			GameObject splish = Instantiate(splash,position,rotation) as GameObject;
-			Destroy(splish, lifetime+0.3f);
+            if (doSplash)
+            {
+                GameObject splish = Instantiate(splash, position, rotation) as GameObject;
+                Destroy(splish, lifetime + 0.3f);
+            }
 		}
 	}
 	
@@ -195,10 +198,17 @@ public class Water : MonoBehaviour {
 			meshes[i].vertices = Vertices;
 		}
 	}
+
+    void RandomWaves()
+    {
+        Splash(Random.Range(-100,100), Random.Range(.01f,0.1f), false);
+    }
 	
 	//Called regularly by Unity
 	void FixedUpdate()
 	{
+
+        RandomWaves();
 		//Here we use the Euler method to handle all the physics of our springs:
 		for (int i = 0; i < xpositions.Length ; i++)
 		{

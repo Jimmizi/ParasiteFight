@@ -275,7 +275,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &326527830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -349,6 +349,10 @@ Prefab:
     - target: {fileID: 400000, guid: dbe56b840c8f31e44944bd3e295c8a59, type: 2}
       propertyPath: m_RootOrder
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: dbe56b840c8f31e44944bd3e295c8a59, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dbe56b840c8f31e44944bd3e295c8a59, type: 2}
@@ -547,11 +551,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNumber: 1
-  playerHealth: 0
+  playerHealth: 100
   playerSpeed: 4
   jumpForce: 300
   PlayerTexture: {fileID: 0}
-  WeaponPrefab: {fileID: 100000, guid: f3700e15a1feeff49838c8a65b0c0133, type: 2}
+  WeaponPrefabs:
+  - {fileID: 100000, guid: f3700e15a1feeff49838c8a65b0c0133, type: 2}
 --- !u!212 &996686375
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -594,6 +599,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 11400000, guid: d9bf6c015055e394c899ab0f7f4baa2e, type: 2}
+      propertyPath: WeaponPrefabs.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d9bf6c015055e394c899ab0f7f4baa2e, type: 2}
       propertyPath: m_LocalPosition.x
       value: -3.21972919
@@ -666,6 +675,14 @@ Prefab:
       propertyPath: m_Layer
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: d9bf6c015055e394c899ab0f7f4baa2e, type: 2}
+      propertyPath: playerHealth
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: d9bf6c015055e394c899ab0f7f4baa2e, type: 2}
+      propertyPath: WeaponPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 100000, guid: f3700e15a1feeff49838c8a65b0c0133, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d9bf6c015055e394c899ab0f7f4baa2e, type: 2}
   m_RootGameObject: {fileID: 996686371}

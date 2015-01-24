@@ -7,6 +7,7 @@ public class Weapon : MonoBehaviour {
 
 	public float weaponDamage;
     public float weaponSpeed;
+    public float weaponRadius;
 
     public Sprite WeaponTexture;
     public Sprite ProjectileTexture;
@@ -19,7 +20,7 @@ public class Weapon : MonoBehaviour {
     public void Shoot(float angle, Vector3 pos)
     {
         GameObject go = (GameObject)Instantiate(ProjectilePrefab, pos + new Vector3(0,1,0), Quaternion.identity);
-        go.GetComponent<Projectile>().Initialise(GrenadeTexture, "GRENADE");
+        go.GetComponent<Projectile>().Initialise(GrenadeTexture, "GRENADE", weaponDamage, weaponRadius, weaponSpeed);
 
         go.AddComponent<PolygonCollider2D>();
         go.GetComponent<PolygonCollider2D>().sharedMaterial = GrenadeBouncyMat;
