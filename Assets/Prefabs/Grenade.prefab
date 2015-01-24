@@ -46,7 +46,6 @@ MonoBehaviour:
   WeaponTexture: {fileID: 0}
   ProjectileTexture: {fileID: 21300000, guid: fb7417f065656ff4e8ac0265cf4d9233, type: 3}
   GrenadeTexture: {fileID: 21300000, guid: 471beea104df8af47bf4590c04c6f1e9, type: 3}
-  GrenadeBouncyMat: {fileID: 6200000, guid: e5491018b64fbd34e935cf4315b444ca, type: 2}
   ProjectilePrefab: {fileID: 100000, guid: 04baacd3dab9f7742a093e8e36783cdb, type: 2}
 --- !u!1001 &100100000
 Prefab:
