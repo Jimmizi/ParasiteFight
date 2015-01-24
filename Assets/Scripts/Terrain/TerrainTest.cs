@@ -1,20 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-//using System.Threading;
 
 public class TerrainTest : MonoBehaviour {
 
-    //Thread thread;
-    //Mutex mainLoop;
+    public GameObject GridPiece;
 
     Sprite sprite = new Sprite();
 
     int sizeX = 5000;
     int sizeY = 1080;
 
-    Texture2D texture;// = new Texture2D(5120, 512);
-    PolygonCollider2D meshCollider;
+    GameObject[,] TerrainGrid;
+
+    Texture2D texture;
 
 	void Start () 
     {
@@ -26,9 +25,6 @@ public class TerrainTest : MonoBehaviour {
             int x = 0;
             while (x < texture.width)
             {
-
-                //Debug.Log(texture.GetPixel(x,y).a);
-
                 if (texture.GetPixel(x, y).a < 0.3f)
                 {
                     texture.SetPixel(x, y, new Color(1, 1, 1, 1));
@@ -89,7 +85,7 @@ public class TerrainTest : MonoBehaviour {
                 texture.SetPixel(x1, y1, new Color(0, 0, 0, 0));
             }
         }
-
+        
         texture.Apply();
 
         Destroy(this.GetComponent<PolygonCollider2D>());
