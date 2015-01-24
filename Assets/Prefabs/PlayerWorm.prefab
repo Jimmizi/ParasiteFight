@@ -106,6 +106,7 @@ GameObject:
   - 61: {fileID: 6100000}
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400000}
+  - 82: {fileID: 8200000}
   m_Layer: 2
   m_Name: PlayerWorm
   m_TagString: Player
@@ -257,6 +258,64 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_Size: {x: .348216534, y: .853030026}
   m_Center: {x: .0191700459, y: .0734853745}
+--- !u!82 &8200000
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100012}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 1
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!95 &9500000
 Animator:
   serializedVersion: 3
@@ -312,6 +371,18 @@ MonoBehaviour:
   BulletSlot: {fileID: 100014}
   Head: {fileID: 100010}
   Body: {fileID: 100008}
+  clip:
+  - {fileID: 8300000, guid: 494da5dbe287f456aa3f5e53e2f47a80, type: 3}
+  - {fileID: 8300000, guid: d662b0c2ff80d4db2a5f7338d2c0ef1f, type: 3}
+  - {fileID: 8300000, guid: 09468091f0a4f407bb2bb9228ee0db05, type: 3}
+  - {fileID: 8300000, guid: 6984d2482daa04faaaad7ba14800101c, type: 3}
+  - {fileID: 8300000, guid: 90940f2619a6a470dbdf3dbf37251b39, type: 3}
+  - {fileID: 8300000, guid: 9a7824cb0e127470a841d410f5964c93, type: 3}
+  - {fileID: 8300000, guid: 9bde71654efdc4aae80bec877d4ba1e0, type: 3}
+  - {fileID: 8300000, guid: e57d5cdadaa184f19929552f4aefc3bf, type: 3}
+  - {fileID: 8300000, guid: eccac50b27b51459780781de8343959e, type: 3}
+  - {fileID: 8300000, guid: 76727ad32d06f461085f3c0427a31063, type: 3}
+  - {fileID: 8300000, guid: f31e123e1c66c40b191ca20f13a18c25, type: 3}
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

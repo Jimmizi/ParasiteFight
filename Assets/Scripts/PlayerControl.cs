@@ -52,6 +52,14 @@ public class PlayerControl : MonoBehaviour
 
     public GameObject Head, Body;
 
+	private AudioSource source;
+	public AudioClip[] clip;
+
+	void Awake()
+	{
+		source = GetComponent<AudioSource> ();
+	}
+
     // Use this for initialization
     void Start()
     {
@@ -71,6 +79,10 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+		for (int i = 0; i < clip.Length; i++) {
+						audio.clip = clip [i];
+				}
+
         grenadeTimer += Time.deltaTime;
         rocketTimer += Time.deltaTime;
         gunTimer += Time.deltaTime;
@@ -155,8 +167,11 @@ public class PlayerControl : MonoBehaviour
         }
 
         //VIN-DEBUG:
-        if (Input.GetKeyDown(KeyCode.F))
-            playerHealth = 0;
+        if (Input.GetKeyDown (KeyCode.F)) {
+
+			playerHealth = 0;
+			audio.PlayOneShot(clip[0]);
+		}
 
         //Shoot
         if (PressedRB())
