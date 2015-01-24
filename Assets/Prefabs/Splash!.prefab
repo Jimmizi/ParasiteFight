@@ -47,7 +47,11 @@ ParticleSystem:
     enabled: 1
     startLifetime:
 <<<<<<< HEAD
+<<<<<<< HEAD
       scalar: .933894336
+=======
+      scalar: .932492495
+>>>>>>> FETCH_HEAD
 =======
       scalar: .932492495
 >>>>>>> FETCH_HEAD
@@ -84,7 +88,11 @@ ParticleSystem:
       minMaxState: 0
     startSpeed:
 <<<<<<< HEAD
+<<<<<<< HEAD
       scalar: 9.47173309
+=======
+      scalar: 9.37739658
+>>>>>>> FETCH_HEAD
 =======
       scalar: 9.37739658
 >>>>>>> FETCH_HEAD
