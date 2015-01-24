@@ -2,7 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class GameplayManager : MonoBehaviour {
+public class GameplayManager : MonoBehaviour
+{
 
     public GameObject PlayerPrefab;
     public GameObject camera;
@@ -12,17 +13,13 @@ public class GameplayManager : MonoBehaviour {
 
     int round = 1;
 
-    public Sprite Three, Two, One, Go;
-    bool gameStart = false;
-    float timer = 4;
-
 
     int[] scores;
     bool[] alive;
 
     int deadCount = 0;
 
-	void Start () 
+    void Start()
     {
         winText.enabled = false;
         scores = new int[4];
@@ -33,9 +30,8 @@ public class GameplayManager : MonoBehaviour {
             scores[i] = 0;
         }
 
-        camera.GetComponent<CameraControl>().enabled = false;
-        //SpawnPlayers();
-	}
+        SpawnPlayers();
+    }
 
     void SpawnPlayers()
     {
@@ -91,36 +87,11 @@ public class GameplayManager : MonoBehaviour {
         deadCount = 0;
     }
 
-    void Update() 
+    void Update()
     {
-        if (!gameStart)
-        {
-            timer -= Time.deltaTime;
-
-            if (timer < 4 && timer > 3)
-                this.GetComponent<SpriteRenderer>().sprite = Three;
-
-            if (timer < 3 && timer > 2)
-                this.GetComponent<SpriteRenderer>().sprite = Two;
-
-            if (timer < 2 && timer > 1)
-                this.GetComponent<SpriteRenderer>().sprite = One;
-
-            if (timer < 1 && timer > 0)
-                this.GetComponent<SpriteRenderer>().sprite = Go;
-
-            if (timer < 0)
-            {
-                SpawnPlayers();
-                camera.GetComponent<CameraControl>().enabled = true;
-                this.GetComponent<SpriteRenderer>().enabled = false;
-                gameStart = true;
-            }
-        }
-
         if (deadCount >= 3)
             RoundEnd();
-	}
+    }
 
     IEnumerator BackToMenu()
     {

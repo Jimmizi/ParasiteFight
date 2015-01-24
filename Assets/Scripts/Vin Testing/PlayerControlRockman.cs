@@ -13,8 +13,6 @@ public class PlayerControlRockman : MonoBehaviour
     private const float MAX_FORCE = 10.0f;
     private const float MAX_SPEED = 10.0f;
 
-    private float m_timer = 0.0f;
-
     private Vector3 m_force = Vector2.zero;
     private Vector3 m_acceleration = Vector2.zero;
     private Vector3 m_velocity = Vector3.zero;
