@@ -13,18 +13,42 @@ public class GibbingSystem : MonoBehaviour
         // This is the fun part, create a number of sprites that this list of giblets will use from 4 different textures
         for (int i = 0; i < GibletSprites.Count; i++)
         {
-            Rect tempRect = new Rect();   // Used to check the sizes
+            Rect tempRect; ;   // Used to check the sizes
             Sprite newSprite;
-            for (int j = 0; j < 10; j++)
+            for (int j = 0; j < 1; j++)
             {
-                tempRect = new Rect(Random.Range(0.0f, GibletSprites[i].textureRect.left), Random.Range(0.0f, GibletSprites[i].textureRect.right), Random.Range(0.0f, GibletSprites[i].textureRect.width), Random.Range(0.0f, GibletSprites[i].textureRect.height));
-                newSprite = Sprite.Create(GibletSprites[i].texture, tempRect, Vector2.zero);
+                float randomLeft = Random.Range(0.0f, GibletSprites[i].textureRect.left);
+                float randomRight = Random.Range(0.0f, GibletSprites[i].textureRect.right);
+                float randomWidth = Random.Range(0.0f, GibletSprites[i].textureRect.width);
+                float randomHeight = Random.Range(0.0f, GibletSprites[i].textureRect.height);
+                tempRect = new Rect(randomLeft, randomRight, randomWidth, randomHeight);
+                newSprite = Sprite.Create(GibletSprites[i].texture, GibletSprites[i].textureRect, Vector2.zero);
                 
-                // Make new game object with components
-                GameObject giblet = Resources.Load<GameObject>("Giblet");
+                // Make new game object with components required
+                GameObject giblet = new GameObject();
+                giblet.AddComponent<SpriteRenderer>();
+                giblet.AddComponent<Rigidbody2D>();
+                
+                // Get the components and set their parameters
+                giblet.GetComponent<SpriteRenderer>().sortingLayerName = "Play";
                 giblet.GetComponent<SpriteRenderer>().sprite = newSprite;
+                
+                // Create a polygon collider 2D after generating sprite to make polygon collider
+                // match graphics of the sprite
+                giblet.AddComponent<PolygonCollider2D>();
+
+                // Make a physics material
+                PhysicsMaterial2D physMat = Resources.Load<PhysicsMaterial2D>("PhysMat/Bouncy");
+                giblet.GetComponent<PolygonCollider2D>().sharedMaterial = physMat;
+
                 m_giblets.Add(giblet);
-            }            
+            }
+        }
+
+        // Instantiate all the giblets
+        for (int i = 0; i < m_giblets.Count; i++)
+        {
+            GameObject go = Instantiate(m_giblets[i]) as GameObject;
         }
     }
 

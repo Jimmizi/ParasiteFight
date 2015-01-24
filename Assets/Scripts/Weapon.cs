@@ -26,6 +26,4 @@ public class Weapon : MonoBehaviour {
     }
 
     Sprite spr;
-
-   
 }

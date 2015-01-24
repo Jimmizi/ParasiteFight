@@ -31,14 +31,11 @@ public class PlayerControl : MonoBehaviour
     private Vector3 m_acceleration = Vector2.zero;
     private Vector3 m_velocity = Vector3.zero;
 
-    private MathHelper m_mathScript = null;
     private Weapon playerWeapon = new Weapon();
 
     // Use this for initialization
     void Start()
     {
-        m_mathScript = GetComponent<MathHelper>();
-
         if (PlayerList == null)
             PlayerList = new List<GameObject>();
 
@@ -53,14 +50,17 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //rigidbody2D.AddForce(new Vector2(Input.GetAxis("C" + playerNumber + " Horizontal"), 0.0f), ForceMode2D.Impulse);
 
-        rigidbody2D.AddForce(new Vector2(Input.GetAxis("C" + playerNumber + " Horizontal"), 0.0f), ForceMode2D.Impulse);
+        if (Input.GetKey(KeyCode.A))
+            rigidbody2D.AddForce(new Vector2(-0.5f, 0.0f), ForceMode2D.Impulse);
+        else if (Input.GetKey(KeyCode.D))
+            rigidbody2D.AddForce(new Vector2(0.5f, 0.0f), ForceMode2D.Impulse);
   
-
-        // If player's velocity is not going in Y, allow 
+        // If player's velocity is less than 6.0f, allow jump
         if (rigidbody2D.velocity.y < 6.0f)
         {
-            if (PressedRB())
+            if (PressedRB() || Input.GetKey(KeyCode.Space))
             {
                 RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up, 1);
                 if (hit.collider != null)
