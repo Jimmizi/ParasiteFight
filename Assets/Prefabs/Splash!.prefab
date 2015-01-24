@@ -46,7 +46,11 @@ ParticleSystem:
   InitialModule:
     enabled: 1
     startLifetime:
+<<<<<<< Updated upstream
       scalar: .934087396
+=======
+      scalar: .943144262
+>>>>>>> Stashed changes
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -79,7 +83,11 @@ ParticleSystem:
         m_PostInfinity: 2
       minMaxState: 0
     startSpeed:
+<<<<<<< Updated upstream
       scalar: 9.4832859
+=======
+      scalar: 9.86666107
+>>>>>>> Stashed changes
       maxCurve:
         serializedVersion: 2
         m_Curve:
