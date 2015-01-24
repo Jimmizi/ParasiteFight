@@ -42,47 +42,54 @@ public class TerrainTest : MonoBehaviour
             }
         }
 
+        y = 17;
+        int currentLayer = 17;
+        int orig = currentLayer;
 
-        //texture = new Texture2D(sizeX, sizeY);
-        //renderer.material.mainTexture = texture[i];
-        //y = 0;
-        //while (y < texture[i].height)
-        //{
-        //    int x = 0;
-        //    while (x < texture.width)
-        //    {
-        //        if (texture.GetPixel(x, y).a < 0.3f)
-        //        {
-        //            texture.SetPixel(x, y, new Color(1, 1, 1, 1));
-
-        //        }
-        //        ++x;
-        //    }
-        //    ++y;
-        //}
-        y = 1080 / 2;
-
-
-
-        for (int i = 0; i < yAmount; i++)
+        //random terrain height
+        for (int x = 0; x < texture[0].width; x++)
         {
-            for (int x = 0; x < texture[i].width; x++)
+            for (int i = currentLayer; i < 25; i++)
             {
-                for (int y1 = y; y1 < texture[i].height; y1++)
+                if (i == currentLayer)
                 {
-                    texture[i].SetPixel(x, y1, new Color(0, 0, 0, 0));
-                }
-
-                if (Random.value < 0.1f)
-                {
-                    if (Random.value >= 0.5f)
+                    for (int y1 = y; y1 < texture[i].height; y1++)
                     {
-                        y += (int)(Random.value * 5);
+                        texture[i].SetPixel(x, y1, new Color(0, 0, 0, 0));
                     }
-                    else y -= (int)(Random.value * 5);
+                }
+                else
+                {
+                    for (int y1 = 0; y1 < texture[i].height; y1++)
+                    {
+                        texture[i].SetPixel(x, y1, new Color(0, 0, 0, 0));
+                    }
                 }
             }
 
+            if (Random.value < 0.1f)
+            {
+                if (Random.value >= 0.5f)
+                {
+                    y += (int)(Random.value * 15);
+                }
+                else y -= (int)(Random.value * 15);
+            }
+
+            if (y > 50)
+            {
+                currentLayer++;
+                y = 0;
+            }
+            else if (y < 0)
+            {
+                currentLayer--;
+                y = 49;
+            }
+        }
+
+        for (int i = 0; i < yAmount; i++)
+        {
             texture[i].Apply();
 
             TerrainGrid[i] = (GameObject)Instantiate(GridPiece);
@@ -97,22 +104,49 @@ public class TerrainTest : MonoBehaviour
             TerrainGrid[i].GetComponent<SpriteRenderer>().sprite = sprite[i];
 
             if (!TerrainGrid[i].gameObject.GetComponent<PolygonCollider2D>())
-                TerrainGrid[i].gameObject.AddComponent<PolygonCollider2D>();
-        }
-
-
-
-        for (int x1 = 2450; x1 < 2550; x1++)
-        {
-            for (int y1 = 0; y1 < 50; y1++)
             {
-                texture[24].SetPixel(x1, y1, new Color(0, 0, 0, 1));
+                int pixels = 0;
+
+                for (int x2 = 0; x2 < texture[i].width; x2++)
+                {
+                    for (int y2 = 0; y2 < texture[i].height; y2++)
+                    {
+                        if (texture[i].GetPixel(x2, y2) != new Color(0, 0, 0, 0))
+                        {
+                            pixels++;
+                        }
+                    }
+                }
+
+                if (pixels > 6)
+                {
+                    TerrainGrid[i].gameObject.AddComponent<PolygonCollider2D>();
+                }
+            }
+            else if (TerrainGrid[i].gameObject.GetComponent<PolygonCollider2D>())
+            {
+                int pixels = 0;
+
+                for (int x2 = 0; x2 < texture[i].width; x2++)
+                {
+                    for (int y2 = 0; y2 < texture[i].height; y2++)
+                    {
+                        if (texture[i].GetPixel(x2, y2) != new Color(0, 0, 0, 0))
+                        {
+                            pixels++;
+                        }
+                    }
+                }
+
+                if (pixels > 6)
+                {
+                    Destroy(TerrainGrid[i].GetComponent<PolygonCollider2D>());
+                    TerrainGrid[i].gameObject.AddComponent<PolygonCollider2D>();
+                }
             }
         }
 
-        texture[24].Apply();
-
-
+        Debug.Log(TerrainGrid[0].GetComponent<PolygonCollider2D>().shapeCount);
     }
 
     // Update is called once per frame
@@ -149,12 +183,12 @@ public class TerrainTest : MonoBehaviour
             {
                 for (int y1 = y; y1 > y - radius * 100; y1--)
                 {
-
                     texture[i].SetPixel(x1, y1, new Color(0, 0, 0, 0));
                 }
             }
 
             texture[i].Apply();
+
 
             Destroy(TerrainGrid[i].GetComponent<PolygonCollider2D>());
             TerrainGrid[i].gameObject.AddComponent<PolygonCollider2D>();

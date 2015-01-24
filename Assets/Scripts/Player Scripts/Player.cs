@@ -29,7 +29,7 @@ public class Player : MonoBehaviour {
         playerWeapon = WeaponPrefabs[0].GetComponent<Weapon>();
 	}
 	
-	void Update () 
+	void FixedUpdate () 
     {
         Vector3 velocity = new Vector3(0, 0, 0);
         jumpLimitTimer += Time.deltaTime;
@@ -39,7 +39,8 @@ public class Player : MonoBehaviour {
 
         //vertical moving
         velocity.x = Input.GetAxis("C" + playerNumber + " Horizontal") * playerSpeed * Time.deltaTime;
-        this.transform.position += new Vector3(velocity.x, 0, 0);
+        this.transform.position = Vector3.Lerp(this.transform.position,this.transform.position + new Vector3(velocity.x * 10, 0, 0),
+                                                Time.deltaTime * 5);
 
         //jump                         
         if (PressedRB() && jumpLimitTimer > 0.2f)
