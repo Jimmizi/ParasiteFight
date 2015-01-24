@@ -65,7 +65,7 @@ public class PlayerControl : MonoBehaviour
 
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         grenadeTimer += Time.deltaTime;
         rocketTimer += Time.deltaTime;
@@ -137,6 +137,10 @@ public class PlayerControl : MonoBehaviour
             
            GunSlot.transform.localRotation = rot;
         }
+
+        //VIN-DEBUG:
+        if (Input.GetKeyDown(KeyCode.F))
+            playerHealth = 0;
 
         //Shoot
         if (PressedRT())

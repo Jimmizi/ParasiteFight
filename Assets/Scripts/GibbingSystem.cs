@@ -79,82 +79,166 @@ public class GibbingSystem : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        // For each particular giblet texture, we partition it and store it in a list which will then
-        // be instantiated to multiple game objects to represent giblets.
-        for (int i = 0; i < GibletSprites.Count; i++)
-        {
-            Sprite currentFullGib = GibletSprites[i];
+        //// For each particular giblet texture, we partition it and store it in a list which will then
+        //// be instantiated to multiple game objects to represent giblets.
+        //for (int i = 0; i < GibletSprites.Count; i++)
+        //{
+        //    Sprite currentFullGib = GibletSprites[i];
 
-            List<Leaf> leafNodes = new List<Leaf>();
+        //    List<Leaf> leafNodes = new List<Leaf>();
 
-            Leaf root = new Leaf(0, 0, (int)GibletSprites[i].textureRect.width, (int)GibletSprites[i].textureRect.height);
-            leafNodes.Add(root);
+        //    // Using BSP Method to slice sprite
+        //    Leaf root = new Leaf(0, 0, (int)GibletSprites[i].textureRect.width, (int)GibletSprites[i].textureRect.height);
+        //    leafNodes.Add(root);
 
-            bool HasSplit = true;
-            while (HasSplit)
-            {
-                HasSplit = false;
-                for(int j = 0; j < leafNodes.Count; j++) 
-                {
-                    if (leafNodes[j].LeftChild == null && leafNodes[j].RightChild == null)
-                    {
-                        if (leafNodes[j].Width > Leaf.MAX_LEAF_SIZE || leafNodes[j].Height > Leaf.MAX_LEAF_SIZE || Random.value > 0.25f)
-                        {
-                            if (leafNodes[j].Split())
-                            {
-                                leafNodes.Add(leafNodes[j].LeftChild);
-                                leafNodes.Add(leafNodes[j].RightChild);
-                                HasSplit = true;
-                            }
-                        }
-                    }
-                }
-            }
+        //    bool HasSplit = true;
+        //    while (HasSplit)
+        //    {
+        //        HasSplit = false;
+        //        for(int j = 0; j < leafNodes.Count; j++) 
+        //        {
+        //            if (leafNodes[j].LeftChild == null && leafNodes[j].RightChild == null)
+        //            {
+        //                if (leafNodes[j].Width > Leaf.MAX_LEAF_SIZE || leafNodes[j].Height > Leaf.MAX_LEAF_SIZE || Random.value > 0.25f)
+        //                {
+        //                    if (leafNodes[j].Split())
+        //                    {
+        //                        leafNodes.Add(leafNodes[j].LeftChild);
+        //                        leafNodes.Add(leafNodes[j].RightChild);
+        //                        HasSplit = true;
+        //                    }
+        //                }
+        //            }
+        //        }
+        //    }
 
-            leafNodes.Remove(root);
+        //    // Remove root node to not show the full sprite picture
+        //    leafNodes.Remove(root);
 
-            Debug.Log(leafNodes.Count);
+        //    for (int k = 0; k < leafNodes.Count; k++)
+        //    {
+        //        Rect tempRect;  // Used to check the sizes
+        //        Sprite newSprite;
 
-            for (int k = 0; k < leafNodes.Count; k++)
-            {
-                Rect tempRect;  // Used to check the sizes
-                Sprite newSprite;
+        //        tempRect = leafNodes[k].Boundary;
+        //        newSprite = Sprite.Create(currentFullGib.texture, tempRect, Vector2.zero);
 
-                tempRect = leafNodes[k].Boundary;
-                newSprite = Sprite.Create(currentFullGib.texture, tempRect, Vector2.zero);
+        //        // Make new game object with components required
+        //        GameObject giblet = new GameObject();
+        //        giblet.transform.position = this.transform.position;
+        //        giblet.AddComponent<SpriteRenderer>();
+        //        giblet.AddComponent<Rigidbody2D>();
 
-                // Make new game object with components required
-                GameObject giblet = new GameObject();
-                giblet.AddComponent<SpriteRenderer>();
-                giblet.AddComponent<Rigidbody2D>();
+        //        // Get the components and set their parameters
+        //        giblet.GetComponent<SpriteRenderer>().sortingLayerName = "Default";
+        //        giblet.GetComponent<SpriteRenderer>().sprite = newSprite;
 
-                // Get the components and set their parameters
-                giblet.GetComponent<SpriteRenderer>().sortingLayerName = "Play";
-                giblet.GetComponent<SpriteRenderer>().sprite = newSprite;
+        //        // Create a polygon collider 2D after generating sprite to make polygon collider
+        //        // match graphics of the sprite
+        //        giblet.AddComponent<BoxCollider2D>();
 
-                // Create a polygon collider 2D after generating sprite to make polygon collider
-                // match graphics of the sprite
-                giblet.AddComponent<BoxCollider2D>();
+        //        // Make a physics material
+        //        PhysicsMaterial2D physMat = Resources.Load<PhysicsMaterial2D>("PhysMat/Bouncy");
+        //        giblet.GetComponent<BoxCollider2D>().sharedMaterial = physMat;
+        //        //giblet.GetComponent<CircleCollider2D>().radius = 0.2f;
 
-                // Make a physics material
-                PhysicsMaterial2D physMat = Resources.Load<PhysicsMaterial2D>("PhysMat/Bouncy");
-                giblet.GetComponent<BoxCollider2D>().sharedMaterial = physMat;
-                //giblet.GetComponent<CircleCollider2D>().radius = 0.2f;
+        //        m_giblets.Add(giblet);
+        //    }
+        //}
 
-                m_giblets.Add(giblet);
-            }
-        }
-
-        // Instantiate all the giblets
-        for (int i = 0; i < m_giblets.Count; i++)
-        {
-            GameObject go = Instantiate(m_giblets[i]) as GameObject;
-        }
+        //// Instantiate all the giblets
+        //for (int i = 0; i < m_giblets.Count; i++)
+        //{
+        //    GameObject go = Instantiate(m_giblets[i]) as GameObject;
+        //}
     }
+
 
     // Update is called once per frame
     void Update()
     {
+        PlayerControl playerController = null;
+
+        if (this.GetComponent<PlayerControl>())
+        {
+            playerController = this.GetComponent<PlayerControl>();
+
+            if (playerController.playerHealth <= 0)
+            {
+                // For each particular giblet texture, we partition it and store it in a list which will then
+                // be instantiated to multiple game objects to represent giblets.
+                for (int i = 0; i < GibletSprites.Count; i++)
+                {
+                    Sprite currentFullGib = GibletSprites[i];
+
+                    List<Leaf> leafNodes = new List<Leaf>();
+
+                    // Using BSP Method to slice sprite
+                    Leaf root = new Leaf(0, 0, (int)GibletSprites[i].textureRect.width, (int)GibletSprites[i].textureRect.height);
+                    leafNodes.Add(root);
+
+                    bool HasSplit = true;
+                    while (HasSplit)
+                    {
+                        HasSplit = false;
+                        for (int j = 0; j < leafNodes.Count; j++)
+                        {
+                            if (leafNodes[j].LeftChild == null && leafNodes[j].RightChild == null)
+                            {
+                                if (leafNodes[j].Width > Leaf.MAX_LEAF_SIZE || leafNodes[j].Height > Leaf.MAX_LEAF_SIZE || Random.value > 0.25f)
+                                {
+                                    if (leafNodes[j].Split())
+                                    {
+                                        leafNodes.Add(leafNodes[j].LeftChild);
+                                        leafNodes.Add(leafNodes[j].RightChild);
+                                        HasSplit = true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    // Remove root node to not show the full sprite picture
+                    leafNodes.Remove(root);
+
+                    for (int k = 0; k < leafNodes.Count; k++)
+                    {
+                        Rect tempRect;  // Used to check the sizes
+                        Sprite newSprite;
+
+                        tempRect = leafNodes[k].Boundary;
+                        newSprite = Sprite.Create(currentFullGib.texture, tempRect, Vector2.zero);
+
+                        // Make new game object with components required
+                        GameObject giblet = new GameObject();
+                        giblet.transform.position = this.transform.position;
+                        giblet.AddComponent<SpriteRenderer>();
+                        giblet.AddComponent<Rigidbody2D>();
+
+                        // Get the components and set their parameters
+                        giblet.GetComponent<SpriteRenderer>().sortingLayerName = "Default";
+                        giblet.GetComponent<SpriteRenderer>().sprite = newSprite;
+
+                        // Create a polygon collider 2D after generating sprite to make polygon collider
+                        // match graphics of the sprite
+                        giblet.AddComponent<BoxCollider2D>();
+
+                        // Make a physics material
+                        PhysicsMaterial2D physMat = Resources.Load<PhysicsMaterial2D>("PhysMat/Bouncy");
+                        giblet.GetComponent<BoxCollider2D>().sharedMaterial = physMat;
+                        //giblet.GetComponent<CircleCollider2D>().radius = 0.2f;
+
+                        m_giblets.Add(giblet);
+                    }
+                }
+            }
+        }
+    }
+
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
+      
     }
 
 
@@ -164,8 +248,8 @@ public class GibbingSystem : MonoBehaviour
         Sprite newSprite;
         for (int j = 0; j < 1; j++)
         {
-            float randomLeft = Random.Range(0.0f, GibletSprites[i].textureRect.left);
-            float randomRight = Random.Range(0.0f, GibletSprites[i].textureRect.right);
+            float randomLeft = Random.Range(0.0f, GibletSprites[i].textureRect.xMin);
+            float randomRight = Random.Range(0.0f, GibletSprites[i].textureRect.xMax);
             float randomWidth = Random.Range(0.0f, GibletSprites[i].textureRect.width);
             float randomHeight = Random.Range(0.0f, GibletSprites[i].textureRect.height);
 
@@ -183,7 +267,7 @@ public class GibbingSystem : MonoBehaviour
             giblet.AddComponent<Rigidbody2D>();
 
             // Get the components and set their parameters
-            giblet.GetComponent<SpriteRenderer>().sortingLayerName = "Play";
+            giblet.GetComponent<SpriteRenderer>().sortingLayerName = "Default";
             giblet.GetComponent<SpriteRenderer>().sprite = newSprite;
 
             // Create a polygon collider 2D after generating sprite to make polygon collider
