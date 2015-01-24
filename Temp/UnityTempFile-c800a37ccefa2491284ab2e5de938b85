@@ -47,6 +47,7 @@
 'Assets/Scripts/PlayerControl.cs'
 'Assets/Scripts/Projectile.cs'
 'Assets/Scripts/Terrain.cs'
+'Assets/Scripts/Terrain/TerrainTest.cs'
 'Assets/Scripts/Water.cs'
 'Assets/Scripts/WaterDetector.cs'
 'Assets/Scripts/Weapon.cs'
