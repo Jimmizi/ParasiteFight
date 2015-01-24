@@ -10,11 +10,10 @@ public class Projectile : MonoBehaviour {
     public ParticleSystem ProjectileHit;
     GameObject Terrain;
 
-
     float yDrag = 0;
     float projectileDamage, projectileRange, projectileSpeed;
 
-    
+	private AudioSource source;
 
     float grenadeTimer, rocketTimer, gunTimer;
 
@@ -122,7 +121,8 @@ public class Projectile : MonoBehaviour {
         }
 
         Instantiate(ProjectileHit, this.transform.position, Quaternion.identity);
-        Explode();
+		Explode();
+
         Destroy(this.gameObject);
     }
 
