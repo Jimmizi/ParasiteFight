@@ -150,6 +150,10 @@ public class PlayerControl : MonoBehaviour
            GunSlot.transform.localRotation = rot;
         }
 
+        //VIN-DEBUG:
+        if (Input.GetKeyDown(KeyCode.F))
+            playerHealth = 0;
+
         //Shoot
         if (PressedRB())
         {
