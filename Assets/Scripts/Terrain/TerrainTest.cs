@@ -165,6 +165,66 @@ public class TerrainTest : MonoBehaviour
 
     }
 
+    public void BloodPaint(Vector3 position)
+    {
+        float truePosX = (position.x - (this.transform.position.x - sizeX / 200));
+        float truePosY = (position.y - (this.transform.position.y - sizeY / 200));
+
+        int y = (int)truePosY * 100;
+        int x = (int)truePosX * 100;
+
+        List<int> closeTo = new List<int>();
+
+        //find what is close
+        for (int i = 0; i < yAmount; i++)
+        {
+            float diff = position.y - TerrainGrid[i].transform.position.y;
+            diff = diff < 0 ? -diff : diff;
+
+            if (diff < 2.5f)
+                closeTo.Add(i);
+        }
+
+        int iter = 1;
+        foreach (int i in closeTo)
+        {
+            //for (int y1 = 0; y1 < texture[i].height; y1++)
+            //{
+            //    for (int x1 = x - (int)radius * 25; x1 < x + radius * 25; x1++)
+            //    {
+            //        texture[i].SetPixel(x1, y1, new Color(0, 0, 0, 0));
+            //    }
+            //}
+            int yIter = Random.Range(25, 50);
+            for (int x1 = x - (int)3 * 150 + Random.Range(-175, 175); x1 < x + 3 * 50 + Random.Range(-175, 175); x1++)
+            {
+                for (int y1 = texture[i].height - 1; y1 > -1; y1--)
+                {
+                    if (y1 > 3 * 35 - (yIter * iter))
+                    {
+                        if (texture[i].GetPixel(x1, y1).a > 0.8f)
+                        {
+                            if(Random.value < 0.6f)
+                                texture[i].SetPixel(x1, y1, new Color(1, 0, 0, 1 ));
+                        }
+                    }
+
+                    if (Random.value < 0.1f)
+                    {
+                        if (Random.value < 0.5f)
+                        {
+                            yIter--;
+                        }
+                        else yIter++;
+                    }
+                }
+            }
+
+            texture[i].Apply();
+            iter++;
+        }
+    }
+
     public void Explode(Vector3 position, float radius)
     {
         float truePosX = (position.x - (this.transform.position.x - sizeX / 200));

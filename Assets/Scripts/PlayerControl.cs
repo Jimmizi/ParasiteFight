@@ -42,15 +42,16 @@ public class PlayerControl : MonoBehaviour
     public GameObject GunSlot;
     public GameObject BulletSlot;
 
-    float grenadeFirerate = .3f;
+    float grenadeFirerate = 1.2f;
     float rocketFirerate = 4;
-    float gunFirerate = 0.3f;
+    float gunFirerate = 0.15f;
 
     float grenadeTimer, gunTimer, rocketTimer = 0;
 
     float shootAniTimer = 0;
 
     public GameObject Head, Body;
+    public ParticleSystem blood;
 
     // Use this for initialization
     void Start()
@@ -80,10 +81,15 @@ public class PlayerControl : MonoBehaviour
         {
             playerHealth = 0;
             GameObject.Find("GameplayManager").GetComponent<GameplayManager>().PlayerDeath(playerNumber);
+
+            GameObject.Find("Terrain").GetComponent<TerrainTest>().BloodPaint(this.transform.position);
+
+            Instantiate(blood, this.transform.position, Quaternion.identity);
+            Instantiate(blood, this.transform.position + new Vector3(0.1f, 0.1f, 0.5f), Quaternion.identity);
+            Instantiate(blood, this.transform.position - new Vector3(0.1f, 0.1f, 0), Quaternion.identity);
+
             this.GetComponent<GibbingSystem>().SplitToGibs2();
             Destroy(gameObject);
-            
-            //Destroy(gameObject);
         }
 
 
@@ -112,7 +118,7 @@ public class PlayerControl : MonoBehaviour
         }
 
 
-        if (PressedA() && jumpLimitTimer > 1)
+        if (PressedA() && jumpLimitTimer > 0.65f)
         {
             if (m_velocity.y < 0.01f && m_velocity.y > -0.01f)
             {
@@ -188,7 +194,6 @@ public class PlayerControl : MonoBehaviour
 
             if (!shot)
             {
-                Debug.Log("Shooting");
                 float angle = Mathf.Atan2(Input.GetAxis("C" + playerNumber + " Vertical R"),
                                           Input.GetAxis("C" + playerNumber + " Horizontal R")) * 180 / Mathf.PI;
 

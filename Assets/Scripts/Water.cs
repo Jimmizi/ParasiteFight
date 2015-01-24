@@ -98,7 +98,7 @@ public class Water : MonoBehaviour {
 		
 		//Add our line renderer and set it up:
 		Body = gameObject.AddComponent<LineRenderer>();
-		Body.material = mat;
+        Body.material = mat;;
 		Body.material.renderQueue = 1000;
 		Body.SetVertexCount(nodecount);
 		Body.SetWidth(0.1f, 0.1f);
@@ -201,7 +201,7 @@ public class Water : MonoBehaviour {
 
     void RandomWaves()
     {
-        Splash(Random.Range(-100,100), Random.Range(.01f,0.2f), false);
+        Splash(Random.Range(-300,300), Random.Range(.01f,0.3f), false);
     }
 
     void OnCollisionEnter2D(Collision2D col)

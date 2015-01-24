@@ -271,7 +271,6 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
   m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -312,6 +311,7 @@ MonoBehaviour:
   BulletSlot: {fileID: 100014}
   Head: {fileID: 100010}
   Body: {fileID: 100008}
+  blood: {fileID: 19800000, guid: b1dfc5c1b2730ff4280df126329518bb, type: 2}
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

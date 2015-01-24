@@ -49,6 +49,7 @@
      <Compile Include="Assets\Code Snippets\tex2d changing.cs" />
      <Compile Include="Assets\Scripts\CameraControl.cs" />
      <Compile Include="Assets\Scripts\Clickspawn.cs" />
+     <Compile Include="Assets\Scripts\Deleter.cs" />
      <Compile Include="Assets\Scripts\GUI\MenuControl.cs" />
      <Compile Include="Assets\Scripts\GameplayManager.cs" />
      <Compile Include="Assets\Scripts\GibbingSystem.cs" />

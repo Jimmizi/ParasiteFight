@@ -41,7 +41,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Grenade
   weaponDamage: 75
-  weaponSpeed: 1000
+  weaponSpeed: 900
   weaponRadius: 4
   WeaponTexture: {fileID: 21300000, guid: 64d6b5e8d71534ff5869413102dad1e9, type: 3}
   ProjectileTexture: {fileID: 21300000, guid: df054b98b5a7f8a48b0586700dfc1925, type: 3}
