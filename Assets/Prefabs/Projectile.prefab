@@ -57,6 +57,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ProjectileHit: {fileID: 19800000, guid: a67c878a7c525fb4ab566154a07678bf, type: 2}
+  Terrain: {fileID: 100000, guid: dbe56b840c8f31e44944bd3e295c8a59, type: 2}
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

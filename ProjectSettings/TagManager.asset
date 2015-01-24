@@ -57,3 +57,7 @@ TagManager:
     userID: 4
     uniqueID: 647050955
     locked: 0
+  - name: Character
+    userID: 5
+    uniqueID: 2862255235
+    locked: 0

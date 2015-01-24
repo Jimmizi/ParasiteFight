@@ -46,7 +46,11 @@ ParticleSystem:
   InitialModule:
     enabled: 1
     startLifetime:
-      scalar: .934288204
+<<<<<<< HEAD
+      scalar: .933894336
+=======
+      scalar: .932492495
+>>>>>>> FETCH_HEAD
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -79,7 +83,11 @@ ParticleSystem:
         m_PostInfinity: 2
       minMaxState: 0
     startSpeed:
-      scalar: 9.49501419
+<<<<<<< HEAD
+      scalar: 9.47173309
+=======
+      scalar: 9.37739658
+>>>>>>> FETCH_HEAD
       maxCurve:
         serializedVersion: 2
         m_Curve:
