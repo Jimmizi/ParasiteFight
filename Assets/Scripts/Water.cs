@@ -98,7 +98,7 @@ public class Water : MonoBehaviour {
 		
 		//Add our line renderer and set it up:
 		Body = gameObject.AddComponent<LineRenderer>();
-        Body.material = mat;;
+        Body.material = mat;
 		Body.material.renderQueue = 1000;
 		Body.SetVertexCount(nodecount);
 		Body.SetWidth(0.1f, 0.1f);

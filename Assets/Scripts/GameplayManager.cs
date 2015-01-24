@@ -12,6 +12,7 @@ public class GameplayManager : MonoBehaviour {
 
     int round = 1;
 
+
     int[] scores;
     bool[] alive;
 

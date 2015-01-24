@@ -44,7 +44,7 @@ public class PlayerControl : MonoBehaviour
 
     float grenadeFirerate = 1.2f;
     float rocketFirerate = 4;
-    float gunFirerate = 0.15f;
+    float gunFirerate = 0.25f;
 
     float grenadeTimer, gunTimer, rocketTimer = 0;
 
