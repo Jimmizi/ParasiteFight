@@ -26,7 +26,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.21972919, y: -.915990174, z: -.591552734}
+  m_LocalPosition: {x: -3.7096386, y: 1.25134754, z: -.591552734}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -55,7 +55,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: .311617136, y: .476829529}
   m_Center: {x: 0, y: 0}
 --- !u!114 &11400000
 MonoBehaviour:
@@ -69,10 +69,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNumber: 1
-  playerHealth: 0
-  playerSpeed: 0
-  PlayerTexture: {fileID: 0}
-  WeaponPrefab: {fileID: 0}
+  playerHealth: 100
+  playerSpeed: 6
+  jumpForce: 300
+  PlayerTexture: {fileID: 21300000, guid: fb7417f065656ff4e8ac0265cf4d9233, type: 3}
+  WeaponPrefabs:
+  - {fileID: 100000, guid: f3700e15a1feeff49838c8a65b0c0133, type: 2}
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1
