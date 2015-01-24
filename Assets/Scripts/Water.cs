@@ -41,7 +41,7 @@ public class Water : MonoBehaviour {
 	void Start()
 	{
 		//Spawning our water
-		SpawnWater(-10,20,-3,-6);
+		SpawnWater(-45,110,2.5f,-12);
 	
 	}
 	

@@ -113,7 +113,7 @@ public class Projectile : MonoBehaviour {
 
     void Explode()
     {
-        foreach (GameObject p in Player.PlayerList)
+        foreach (GameObject p in PlayerControl.PlayerList)
         {
             float dist = Vector3.Distance(this.transform.position, p.transform.position);
 

@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 public class TerrainTest : MonoBehaviour
 {
-
     public GameObject GridPiece;
     public Camera camera;
 
@@ -25,8 +24,7 @@ public class TerrainTest : MonoBehaviour
         sprite = new Sprite[yAmount];
         texture = new Texture2D[yAmount];
         deadCollision = new int[yAmount];
-        //sprite = new Sprite[xAmount];
-        //renderer.material.mainTexture = texture;
+
         int y = 0;
 
         for (int i = 0; i < yAmount; i++)

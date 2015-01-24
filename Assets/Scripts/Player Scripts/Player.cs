@@ -12,7 +12,7 @@ public class Player : MonoBehaviour {
     public float playerSpeed;
     public float jumpForce;
 
-    public Sprite PlayerTexture;
+    //public Sprite PlayerTexture;
     public List<GameObject> WeaponPrefabs;
 
     private Weapon playerWeapon = new Weapon();
