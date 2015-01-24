@@ -36,14 +36,14 @@ public class PlayerControl : MonoBehaviour
     private Weapon playerWeapon = new Weapon();
     int weapon = 1;
 
-    bool goingLeft = true;
+    bool goingRight = true;
     private float jumpLimitTimer = 0;
 
     public GameObject GunSlot;
     public GameObject BulletSlot;
 
-    float grenadeFirerate = 1;
-    float rocketFirerate = 2;
+    float grenadeFirerate = .3f;
+    float rocketFirerate = 4;
     float gunFirerate = 0.3f;
 
     float grenadeTimer, gunTimer, rocketTimer = 0;
@@ -86,11 +86,11 @@ public class PlayerControl : MonoBehaviour
                                                 Time.deltaTime * 15);
 
         if (Input.GetAxis("C" + playerNumber + " Horizontal") > 0.1f)
-            goingLeft = true;
+            goingRight = true;
         else if (Input.GetAxis("C" + playerNumber + " Horizontal") < -0.1f)
-            goingLeft = false;
+            goingRight = false;
 
-        if (goingLeft)
+        if (goingRight)
             this.transform.localScale = new Vector3(1, 1, 1);
         else
             this.transform.localScale = new Vector3(-1, 1, 1);
@@ -116,6 +116,8 @@ public class PlayerControl : MonoBehaviour
                 weapon = 1;
             else if (weapon == 1)
                 weapon = 0;
+            else if (weapon == 2)
+                weapon = 0;
 
             playerWeapon = WeaponPrefabs[weapon].GetComponent<Weapon>();
             GunSlot.GetComponent<SpriteRenderer>().sprite = WeaponPrefabs[weapon].GetComponent<Weapon>().WeaponTexture;
@@ -126,9 +128,14 @@ public class PlayerControl : MonoBehaviour
             float angle = Mathf.Atan2(Input.GetAxis("C" + playerNumber + " Vertical R"),
                                           Input.GetAxis("C" + playerNumber + " Horizontal R")) * 180 / Mathf.PI;
 
-                Quaternion rot = GunSlot.transform.rotation;
+            Quaternion rot = GunSlot.transform.rotation;
+
+            if(goingRight)
                 rot.eulerAngles = new Vector3(rot.eulerAngles.x, rot.eulerAngles.y, angle);
-                GunSlot.transform.localRotation = rot;
+            else
+                rot.eulerAngles = -new Vector3(rot.eulerAngles.x, rot.eulerAngles.y, -angle);
+            
+           GunSlot.transform.localRotation = rot;
         }
 
         //Shoot
@@ -149,6 +156,14 @@ public class PlayerControl : MonoBehaviour
                     return;
                 }
                 else gunTimer = 0;
+            }
+            else if (weapon == 2)
+            {
+                if (rocketTimer < rocketFirerate)
+                {
+                    return;
+                }
+                else rocketTimer = 0;
             }
 
             if (!shot)

@@ -51,6 +51,8 @@
      <Compile Include="Assets\Scripts\Clickspawn.cs" />
      <Compile Include="Assets\Scripts\GUI\MenuControl.cs" />
      <Compile Include="Assets\Scripts\GameplayManager.cs" />
+     <Compile Include="Assets\Scripts\GibbingSystem.cs" />
+     <Compile Include="Assets\Scripts\Giblet.cs" />
      <Compile Include="Assets\Scripts\MathHelper.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\Player.cs" />
      <Compile Include="Assets\Scripts\PlayerAnimation.cs" />
@@ -58,6 +60,7 @@
      <Compile Include="Assets\Scripts\Projectile.cs" />
      <Compile Include="Assets\Scripts\Terrain.cs" />
      <Compile Include="Assets\Scripts\Terrain\TerrainTest.cs" />
+     <Compile Include="Assets\Scripts\Vin Testing\PlayerControlRockman.cs" />
      <Compile Include="Assets\Scripts\Water.cs" />
      <Compile Include="Assets\Scripts\WaterDetector.cs" />
      <Compile Include="Assets\Scripts\Weapon.cs" />

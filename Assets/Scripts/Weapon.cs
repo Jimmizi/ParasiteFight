@@ -27,7 +27,10 @@ public class Weapon : MonoBehaviour {
             go.GetComponent<Projectile>().Initialise(GrenadeTexture, "BULLET", weaponDamage, weaponRadius, weaponSpeed);
 
         if (wep == 2)
+        {
             go.GetComponent<Projectile>().Initialise(GrenadeTexture, "ROCKET", weaponDamage, weaponRadius, weaponSpeed);
+            
+        }
 
         go.AddComponent<PolygonCollider2D>();
 

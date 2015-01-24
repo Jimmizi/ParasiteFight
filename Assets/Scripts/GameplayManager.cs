@@ -6,6 +6,7 @@ public class GameplayManager : MonoBehaviour {
 
     public GameObject PlayerPrefab;
     public GameObject camera;
+    public GUIText winText;
 
     private List<GameObject> PlayerList = new List<GameObject>();
 
@@ -18,6 +19,7 @@ public class GameplayManager : MonoBehaviour {
 
 	void Start () 
     {
+        winText.enabled = false;
         scores = new int[4];
         alive = new bool[4];
 
@@ -67,16 +69,38 @@ public class GameplayManager : MonoBehaviour {
                 scores[i]++;
 
             Destroy(PlayerList[i]);
+
+            if (scores[i] >= 3)
+                GameOver(i + 1);
         }
 
         SpawnPlayers();
+    }
+
+    void GameOver(int playerWon)
+    {
+        winText.enabled = true;
+        winText.GetComponent<GUIText>().text = "Player " + playerWon + " wins!";
+        StartCoroutine("BackToMenu");
+        deadCount = 0;
     }
 
     void Update() 
     {
         if (deadCount >= 3)
             RoundEnd();
-
-        
 	}
+
+    IEnumerator BackToMenu()
+    {
+        float timer = 0;
+
+        while (timer < 2)
+        {
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        Application.LoadLevel("menu");
+    }
 }

@@ -142,7 +142,7 @@ public class Projectile : MonoBehaviour {
                     else
                         p.GetComponent<PlayerControl>().DamagePlayer((int)projectileDamage);
 
-                    p.GetComponent<Rigidbody2D>().AddForce(p.transform.position - this.transform.position * 50);
+                    p.GetComponent<Rigidbody2D>().AddForce(-(p.transform.position - this.transform.position * 50));
                 }
             }
         }

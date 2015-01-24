@@ -284,6 +284,7 @@ MonoBehaviour:
   WeaponPrefabs:
   - {fileID: 100000, guid: f3700e15a1feeff49838c8a65b0c0133, type: 2}
   - {fileID: 100000, guid: 9029ff1075a988f46b88f16c7336ec98, type: 2}
+  - {fileID: 100000, guid: 3cf411c9ff10d6b46a025cf67c345fe2, type: 2}
   playerNumber: 1
   roundWins: 0
   playerHealth: 100
