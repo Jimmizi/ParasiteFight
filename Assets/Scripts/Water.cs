@@ -87,9 +87,9 @@ public class Water : MonoBehaviour {
 	{
 		//Bonus exercise: Add a box collider to the water that will allow things to float in it.
 		gameObject.AddComponent<BoxCollider2D>();
-		gameObject.GetComponent<BoxCollider2D>().center = new Vector2(Left + Width / 2, (Top + Bottom) / 2);
+		gameObject.GetComponent<BoxCollider2D>().center = new Vector2(Left + Width / 2, -14.6f);
 		gameObject.GetComponent<BoxCollider2D>().size = new Vector2(Width, Top - Bottom);
-		gameObject.GetComponent<BoxCollider2D>().isTrigger = true;
+		//gameObject.GetComponent<BoxCollider2D>().isTrigger = true;
 		
 		
 		//Calculating the number of edges and nodes we have
@@ -201,10 +201,17 @@ public class Water : MonoBehaviour {
 
     void RandomWaves()
     {
-        Splash(Random.Range(-100,100), Random.Range(.01f,0.1f), false);
+        Splash(Random.Range(-100,100), Random.Range(.01f,0.2f), false);
     }
-	
-	//Called regularly by Unity
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.collider.tag == "Player")
+        {
+            col.collider.GetComponentInParent<PlayerControl>().DamagePlayer(100);
+        }
+    }
+
 	void FixedUpdate()
 	{
 
@@ -252,14 +259,6 @@ public class Water : MonoBehaviour {
 		}
 		//Finally we update the meshes to reflect this
 		UpdateMeshes();
-	}
-	
-	void OnTriggerStay2D(Collider2D Hit)
-	{
-		//Bonus exercise. Fill in your code here for making things float in your water.
-		//You might want to even include a buoyancy constant unique to each object!
-	}
-	
-	
+	}	
 }
 

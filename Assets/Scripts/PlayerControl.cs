@@ -16,6 +16,7 @@ public class PlayerControl : MonoBehaviour
     private bool shot = false;
 
     public int playerNumber;
+    public int roundWins = 0;
 
     public int playerHealth;
     public float playerSpeed;
@@ -33,6 +34,19 @@ public class PlayerControl : MonoBehaviour
 
     private MathHelper m_mathScript = null;
     private Weapon playerWeapon = new Weapon();
+    int weapon = 1;
+
+    bool goingLeft = true;
+    private float jumpLimitTimer = 0;
+
+    public GameObject GunSlot;
+    public GameObject BulletSlot;
+
+    float grenadeFirerate = 1;
+    float rocketFirerate = 2;
+    float gunFirerate = 0.3f;
+
+    float grenadeTimer, gunTimer, rocketTimer = 0;
 
     // Use this for initialization
     void Start()
@@ -43,7 +57,7 @@ public class PlayerControl : MonoBehaviour
             PlayerList = new List<GameObject>();
 
         PlayerList.Add(this.gameObject);
-        playerWeapon = WeaponPrefabs[0].GetComponent<Weapon>();
+        playerWeapon = WeaponPrefabs[weapon].GetComponent<Weapon>();
 
         m_isAllowJump = true;
 
@@ -53,33 +67,98 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        grenadeTimer += Time.deltaTime;
+        rocketTimer += Time.deltaTime;
+        gunTimer += Time.deltaTime;
 
-        rigidbody2D.AddForce(new Vector2(Input.GetAxis("C" + playerNumber + " Horizontal"), 0.0f), ForceMode2D.Impulse);
-  
-
-        // If player's velocity is not going in Y, allow 
-        if (rigidbody2D.velocity.y < 6.0f)
+        if (playerHealth <= 0)
         {
-            if (PressedRB())
+            GameObject.Find("GameplayManager").GetComponent<GameplayManager>().PlayerDeath(playerNumber);
+            Destroy(gameObject);
+        }
+
+
+        jumpLimitTimer += Time.deltaTime;
+        //rigidbody2D.AddForce(new Vector2(Input.GetAxis("C" + playerNumber + " Horizontal") * 6, 0.0f));
+
+        float velo = Input.GetAxis("C" + playerNumber + " Horizontal") * playerSpeed * Time.deltaTime;
+        this.transform.position = Vector3.Lerp(this.transform.position, this.transform.position + new Vector3(velo * 10, 0, 0),
+                                                Time.deltaTime * 15);
+
+        if (Input.GetAxis("C" + playerNumber + " Horizontal") > 0.1f)
+            goingLeft = true;
+        else if (Input.GetAxis("C" + playerNumber + " Horizontal") < -0.1f)
+            goingLeft = false;
+
+        if (goingLeft)
+            this.transform.localScale = new Vector3(1, 1, 1);
+        else
+            this.transform.localScale = new Vector3(-1, 1, 1);
+
+
+        if (PressedRB() && jumpLimitTimer > 1)
+        {
+            if (m_velocity.y < 0.01f && m_velocity.y > -0.01f)
             {
                 RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up, 1);
                 if (hit.collider != null)
                 {
-                    rigidbody2D.AddForce(new Vector2(0.0f, 300.0f));
+                    Debug.DrawRay(transform.position, -Vector2.up, Color.red);
+                    rigidbody2D.AddForce(new Vector2(0.0f, jumpForce));
+                    jumpLimitTimer = 0;
                 }
             }
+        }
+
+        if (PressedA())
+        {
+            if (weapon == 0)
+                weapon = 1;
+            else if (weapon == 1)
+                weapon = 0;
+
+            playerWeapon = WeaponPrefabs[weapon].GetComponent<Weapon>();
+            GunSlot.GetComponent<SpriteRenderer>().sprite = WeaponPrefabs[weapon].GetComponent<Weapon>().WeaponTexture;
+        }
+
+        if(Input.GetAxis("C" + playerNumber + " Vertical R") != 0 || Input.GetAxis("C" + playerNumber + " Horizontal R") != 0)
+        {
+            float angle = Mathf.Atan2(Input.GetAxis("C" + playerNumber + " Vertical R"),
+                                          Input.GetAxis("C" + playerNumber + " Horizontal R")) * 180 / Mathf.PI;
+
+                Quaternion rot = GunSlot.transform.rotation;
+                rot.eulerAngles = new Vector3(rot.eulerAngles.x, rot.eulerAngles.y, angle);
+                GunSlot.transform.localRotation = rot;
         }
 
         //Shoot
         if (PressedRT())
         {
+            if (weapon == 0)
+            {
+                if (grenadeTimer < grenadeFirerate)
+                {
+                    return;
+                }
+                else grenadeTimer = 0;
+            }
+            else if (weapon == 1)
+            {
+                if (gunTimer < gunFirerate)
+                {
+                    return;
+                }
+                else gunTimer = 0;
+            }
+
             if (!shot)
             {
                 Debug.Log("Shooting");
                 float angle = Mathf.Atan2(Input.GetAxis("C" + playerNumber + " Vertical R"),
                                           Input.GetAxis("C" + playerNumber + " Horizontal R")) * 180 / Mathf.PI;
 
-                WeaponPrefabs[0].GetComponent<Weapon>().Shoot(angle, this.transform.position);
+
+                WeaponPrefabs[weapon].GetComponent<Weapon>().Shoot(angle, BulletSlot.transform.position,weapon);
 
                 shot = true;
             }

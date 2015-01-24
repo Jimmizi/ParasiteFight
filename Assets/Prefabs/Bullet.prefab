@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 400000}
   - 114: {fileID: 11400000}
   m_Layer: 0
-  m_Name: Grenade
+  m_Name: Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41,11 +41,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Grenade
   weaponDamage: 75
-  weaponSpeed: 300
+  weaponSpeed: 1000
   weaponRadius: 4
-  WeaponTexture: {fileID: 21300000, guid: 471beea104df8af47bf4590c04c6f1e9, type: 3}
-  ProjectileTexture: {fileID: 21300000, guid: 471beea104df8af47bf4590c04c6f1e9, type: 3}
-  GrenadeTexture: {fileID: 21300000, guid: 471beea104df8af47bf4590c04c6f1e9, type: 3}
+  WeaponTexture: {fileID: 21300000, guid: 64d6b5e8d71534ff5869413102dad1e9, type: 3}
+  ProjectileTexture: {fileID: 21300000, guid: df054b98b5a7f8a48b0586700dfc1925, type: 3}
+  GrenadeTexture: {fileID: 21300000, guid: df054b98b5a7f8a48b0586700dfc1925, type: 3}
   ProjectilePrefab: {fileID: 100000, guid: 04baacd3dab9f7742a093e8e36783cdb, type: 2}
 --- !u!1001 &100100000
 Prefab:

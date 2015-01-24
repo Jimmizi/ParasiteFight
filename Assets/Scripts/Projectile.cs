@@ -14,23 +14,33 @@ public class Projectile : MonoBehaviour {
     float yDrag = 0;
     float projectileDamage, projectileRange, projectileSpeed;
 
+    
+
+    float grenadeTimer, rocketTimer, gunTimer;
+
     //copy the sprite
     public void Initialise(Sprite spr, string pType, float damage, float radius, float speed)
     {
+        if (pType == "GRENADE")
+        {
+            projectileType = Type.GRENADE;
+        }
+
+        if (pType == "BULLET")
+        {
+            projectileType = Type.BULLET;
+        }
+
+        if (pType == "ROCKET")
+        {
+            projectileType = Type.ROCKET;
+        }
+
         Terrain = GameObject.Find("Terrain");
 
         projectileDamage = damage;
         projectileRange = radius;
         projectileSpeed = speed;
-
-        if (pType == "GRENADE")
-            projectileType = Type.GRENADE;
-
-        if (pType == "BULLET")
-            projectileType = Type.BULLET;
-
-        if (pType == "ROCKET")
-            projectileType = Type.ROCKET;
 
         this.GetComponent<SpriteRenderer>().sprite = spr;
     }
@@ -46,6 +56,11 @@ public class Projectile : MonoBehaviour {
             this.rigidbody2D.AddTorque(Random.Range(0,300));
             StartCoroutine("GrenadeExplode");
         }
+    }
+
+    public void Update()
+    {
+        
     }
 
     void OnCollisionEnter2D(Collision2D col)
@@ -73,9 +88,9 @@ public class Projectile : MonoBehaviour {
 
         if (projectileType == Type.BULLET)
         {
-            if(col.collider.GetComponent<Player>())
+            if(col.collider.GetComponent<PlayerControl>())
             {
-                col.collider.GetComponent<Player>().DamagePlayer((int)Random.Range(projectileDamage * 0.8f, projectileDamage * 1.2f));
+                col.collider.GetComponent<PlayerControl>().DamagePlayer((int)Random.Range(projectileDamage * 0.2f, projectileDamage * 0.4f));
             }
 
             Destroy(this.gameObject);
@@ -115,17 +130,20 @@ public class Projectile : MonoBehaviour {
     {
         foreach (GameObject p in PlayerControl.PlayerList)
         {
-            float dist = Vector3.Distance(this.transform.position, p.transform.position);
-
-            if (dist < projectileRange)
+            if (p != null)
             {
-                //if above 25% range calculate damage based on distance else damage for the full amount
-                if (dist / projectileRange > 0.25f)
-                    p.GetComponent<Player>().DamagePlayer((int)(projectileDamage * (1 - (dist / projectileRange))));
-                else
-                    p.GetComponent<Player>().DamagePlayer((int)projectileDamage);
+                float dist = Vector3.Distance(this.transform.position, p.transform.position);
 
-                p.GetComponent<Rigidbody2D>().AddForce(p.transform.position - this.transform.position * 50);
+                if (dist < projectileRange)
+                {
+                    //if above 25% range calculate damage based on distance else damage for the full amount
+                    if (dist / projectileRange > 0.25f)
+                        p.GetComponent<PlayerControl>().DamagePlayer((int)(projectileDamage * (1 - (dist / projectileRange))));
+                    else
+                        p.GetComponent<PlayerControl>().DamagePlayer((int)projectileDamage);
+
+                    p.GetComponent<Rigidbody2D>().AddForce(p.transform.position - this.transform.position * 50);
+                }
             }
         }
 
