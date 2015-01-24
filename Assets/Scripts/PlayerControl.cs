@@ -32,7 +32,6 @@ public class PlayerControl : MonoBehaviour
     private Vector3 m_acceleration = Vector2.zero;
     private Vector3 m_velocity = Vector3.zero;
 
-    private MathHelper m_mathScript = null;
     private Weapon playerWeapon = new Weapon();
     int weapon = 1;
 
@@ -64,8 +63,6 @@ public class PlayerControl : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        m_mathScript = GetComponent<MathHelper>();
-
         if (PlayerList == null)
             PlayerList = new List<GameObject>();
 
