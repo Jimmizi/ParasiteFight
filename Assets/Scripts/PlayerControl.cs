@@ -78,8 +78,12 @@ public class PlayerControl : MonoBehaviour
 
         if (playerHealth <= 0)
         {
+            playerHealth = 0;
             GameObject.Find("GameplayManager").GetComponent<GameplayManager>().PlayerDeath(playerNumber);
+            this.GetComponent<GibbingSystem>().SplitToGibs2();
             Destroy(gameObject);
+            
+            //Destroy(gameObject);
         }
 
 
