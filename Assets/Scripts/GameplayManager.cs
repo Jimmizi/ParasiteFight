@@ -12,6 +12,10 @@ public class GameplayManager : MonoBehaviour {
 
     int round = 1;
 
+    public Sprite Three, Two, One, Go;
+    bool gameStart = false;
+    float timer = 4;
+
 
     int[] scores;
     bool[] alive;
@@ -29,7 +33,8 @@ public class GameplayManager : MonoBehaviour {
             scores[i] = 0;
         }
 
-        SpawnPlayers();
+        camera.GetComponent<CameraControl>().enabled = false;
+        //SpawnPlayers();
 	}
 
     void SpawnPlayers()
@@ -88,6 +93,31 @@ public class GameplayManager : MonoBehaviour {
 
     void Update() 
     {
+        if (!gameStart)
+        {
+            timer -= Time.deltaTime;
+
+            if (timer < 4 && timer > 3)
+                this.GetComponent<SpriteRenderer>().sprite = Three;
+
+            if (timer < 3 && timer > 2)
+                this.GetComponent<SpriteRenderer>().sprite = Two;
+
+            if (timer < 2 && timer > 1)
+                this.GetComponent<SpriteRenderer>().sprite = One;
+
+            if (timer < 1 && timer > 0)
+                this.GetComponent<SpriteRenderer>().sprite = Go;
+
+            if (timer < 0)
+            {
+                SpawnPlayers();
+                camera.GetComponent<CameraControl>().enabled = true;
+                this.GetComponent<SpriteRenderer>().enabled = false;
+                gameStart = true;
+            }
+        }
+
         if (deadCount >= 3)
             RoundEnd();
 	}
