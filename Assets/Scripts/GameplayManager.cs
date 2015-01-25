@@ -87,7 +87,7 @@ public class GameplayManager : MonoBehaviour
 
             Destroy(PlayerList[i]);
 
-            if (scores[i] >= 3)
+            if (scores[i] >= 1)
                 GameOver(i + 1);
         }
 
@@ -96,8 +96,9 @@ public class GameplayManager : MonoBehaviour
 
     void GameOver(int playerWon)
     {
+        string str = "Player " + playerWon + " wins!";
         winText.enabled = true;
-        winText.GetComponent<GUIText>().text = "Player " + playerWon + " wins!";
+        winText.GetComponent<GUIText>().text = str;
         StartCoroutine("BackToMenu");
         deadCount = 0;
     }
