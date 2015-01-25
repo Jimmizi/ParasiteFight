@@ -10,6 +10,10 @@ public class PlayerControl : MonoBehaviour
     //public float Mass = 1.0f;
     //public float DragCoefficient = 100.0f;
 
+    public GameObject Gib1;
+
+    public AudioClip GrenadeThrow, GunShoot;
+
     public static List<GameObject> PlayerList;
     public List<GameObject> WeaponPrefabs;
 
@@ -98,6 +102,8 @@ public class PlayerControl : MonoBehaviour
             Instantiate(blood, this.transform.position + new Vector3(0.1f, 0.1f, 0.5f), Quaternion.identity);
             Instantiate(blood, this.transform.position - new Vector3(0.1f, 0.1f, 0), Quaternion.identity);
 
+            Instantiate(Gib1);
+
             this.GetComponent<GibbingSystem>().SplitToGibs2();
             Destroy(gameObject);
         }
@@ -179,7 +185,7 @@ public class PlayerControl : MonoBehaviour
         }
 
         //Shoot
-        if (PressedRB())
+        if (PressedRB() || PressedRT())
         {
             if (weapon == 0)
             {
@@ -197,19 +203,16 @@ public class PlayerControl : MonoBehaviour
                 }
                 else gunTimer = 0;
             }
-            else if (weapon == 2)
-            {
-                if (rocketTimer < rocketFirerate)
-                {
-                    return;
-                }
-                else rocketTimer = 0;
-            }
 
             if (!shot)
             {
                 float angle = Mathf.Atan2(Input.GetAxis("C" + playerNumber + " Vertical R"),
                                           Input.GetAxis("C" + playerNumber + " Horizontal R")) * 180 / Mathf.PI;
+
+                if (weapon == 0)
+                    this.GetComponent<AudioSource>().PlayOneShot(GrenadeThrow);
+                else if(weapon == 1)
+                    this.GetComponent<AudioSource>().PlayOneShot(GunShoot);
 
                 WeaponPrefabs[weapon].GetComponent<Weapon>().Shoot(angle, BulletSlot.transform.position, weapon, this.rigidbody2D.velocity);
 

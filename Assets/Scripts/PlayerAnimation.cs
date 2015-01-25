@@ -15,29 +15,31 @@ public class PlayerAnimation : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
-		if (Input.GetKey(KeyCode.S)) 
-		{
-			
-			anim.SetFloat ("Spin", 0.5f);
-			
-		} 
-		else {
-			
-			anim.SetFloat("Spin", 0.0f);
-			
-		}
+        //animation floats do not exist
 
-		if (Input.GetKeyDown (KeyCode.Space)) 
-		{
+        //if (Input.GetKey(KeyCode.S)) 
+        //{
+			
+        //    anim.SetFloat ("Spin", 0.5f);
+			
+        //} 
+        //else {
+			
+        //    anim.SetFloat("Spin", 0.0f);
+			
+        //}
 
-			anim.SetBool ("Firing", true);
+        //if (Input.GetKeyDown (KeyCode.Space)) 
+        //{
+
+        //    anim.SetBool ("Firing", true);
 		
-		} 
-		else {
+        //} 
+        //else {
 		
-			anim.SetBool("Firing", false);
+        //    anim.SetBool("Firing", false);
 		
-		}
+        //}
 
 	}
 }

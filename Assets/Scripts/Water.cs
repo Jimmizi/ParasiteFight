@@ -2,6 +2,8 @@
 using System.Collections;
 
 public class Water : MonoBehaviour {
+
+    public AudioClip SplashSound;
 	
 	//Our renderer that'll make the top of the water visible
 	LineRenderer Body;
@@ -36,14 +38,19 @@ public class Water : MonoBehaviour {
 	float baseheight;
 	float left;
 	float bottom;
-	
-	
+
+    float limitSoundTimer = 0;
+
 	void Start()
 	{
 		//Spawning our water
 		SpawnWater(-45,110,2.5f,-12);
-	
 	}
+
+    void PlaySplashSound()
+    {
+
+    }
 	
 	
 	public void Splash(float xpos, float velocity, bool doSplash = true)
@@ -78,6 +85,13 @@ public class Water : MonoBehaviour {
             if (doSplash)
             {
                 GameObject splish = Instantiate(splash, position, rotation) as GameObject;
+
+                if (limitSoundTimer > 0.15f)
+                {
+                    this.GetComponent<AudioSource>().PlayOneShot(SplashSound);
+                    limitSoundTimer = 0;
+                }
+
                 Destroy(splish, lifetime + 0.3f);
             }
 		}
@@ -206,6 +220,15 @@ public class Water : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D col)
     {
+        if (col.collider.name == "Projectile(Clone)")
+            Destroy(col.collider.gameObject);
+
+        if (col.collider.name == "New GameObject")
+        {
+            if(Random.value < 0.3f)
+                Destroy(col.collider.gameObject);
+        }
+
         if (col.collider.tag == "Player")
         {
             col.collider.GetComponentInParent<PlayerControl>().DamagePlayer(100);
@@ -214,6 +237,7 @@ public class Water : MonoBehaviour {
 
 	void FixedUpdate()
 	{
+        limitSoundTimer += Time.deltaTime;
 
         RandomWaves();
 		//Here we use the Euler method to handle all the physics of our springs:

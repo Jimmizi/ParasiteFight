@@ -75,6 +75,7 @@ public class GibbingSystem : MonoBehaviour
 {
     public List<Sprite> GibletSprites = new List<Sprite>(4);
     private List<GameObject> m_giblets = new List<GameObject>();
+    public AudioClip Gib1;
 
     // Use this for initialization
     void Start()

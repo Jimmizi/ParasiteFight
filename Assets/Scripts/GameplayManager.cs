@@ -11,14 +11,19 @@ public class GameplayManager : MonoBehaviour
 
     private List<GameObject> PlayerList = new List<GameObject>();
 
+    public AudioClip CountdownClip, GoClip;
+
     int round = 1;
 
     public Sprite Three, Two, One, Go;
+    bool PlayedOne, PlayedTwo, PlayedThree, PlayedGo;
     bool countdown = true;
     float timer = 4;
 
     int[] scores;
     bool[] alive;
+
+    const int TARGET_SCORE = 3;
 
     int deadCount = 0;
 
@@ -33,11 +38,17 @@ public class GameplayManager : MonoBehaviour
             scores[i] = 0;
         }
         camera.GetComponent<CameraControl>().enabled = false;
+        PlayedOne = false;
+        PlayedTwo = false;
+        PlayedThree = false;
+        PlayedGo = false;
+
         //SpawnPlayers();
     }
 
     void SpawnPlayers()
     {
+        deadCount = 0;
         PlayerList.Clear();
         camera.GetComponent<CameraControl>().Targets.Clear();
 
@@ -53,22 +64,47 @@ public class GameplayManager : MonoBehaviour
         go = (GameObject)Instantiate(P4);
         PlayerList.Add(go);
 
-        
-
         for (int i = 0; i < 4; i++)
         {
             alive[i] = true;
             PlayerList[i].GetComponent<PlayerControl>().playerNumber = i + 1;
             camera.GetComponent<CameraControl>().Targets.Add(PlayerList[i]);
         }
-        
 
-        PlayerList[0].transform.position = new Vector3(-20, 15, 0);
-        PlayerList[1].transform.position = new Vector3(-8, 15, 0);
-        PlayerList[2].transform.position = new Vector3(8, 15, 0);
-        PlayerList[3].transform.position = new Vector3(20, 15, 0);
+        string[] controllers = Input.GetJoystickNames();
+        int amount = 0;
 
-        deadCount = 0;
+        foreach (string s in controllers)
+        {
+            amount++;
+        }
+
+        if (amount == 2)
+        {
+            PlayerList[0].transform.position = new Vector3(-20, 15, 0);
+            PlayerList[2].transform.position = new Vector3(-8, 15, 0);
+            PlayerList[3].transform.position = new Vector3(8, 15, 0);
+            PlayerList[1].transform.position = new Vector3(20, 15, 0);
+        }
+        else
+        {
+            PlayerList[0].transform.position = new Vector3(-20, 15, 0);
+            PlayerList[1].transform.position = new Vector3(-8, 15, 0);
+            PlayerList[2].transform.position = new Vector3(8, 15, 0);
+            PlayerList[3].transform.position = new Vector3(20, 15, 0);
+        }
+
+        //start killing players off if more than one controller
+        if (amount > 1)
+        {
+            if (amount != 4)
+            {
+                for (int i = amount; i < 4; i++)
+                {
+                    PlayerList[i].GetComponent<PlayerControl>().playerHealth = 0;
+                }
+            }
+        }
     }
 
     public void PlayerDeath(int player)
@@ -87,7 +123,7 @@ public class GameplayManager : MonoBehaviour
 
             Destroy(PlayerList[i]);
 
-            if (scores[i] >= 1)
+            if (scores[i] >= TARGET_SCORE)
                 GameOver(i + 1);
         }
 
@@ -111,18 +147,42 @@ public class GameplayManager : MonoBehaviour
 
             if (timer < 4 && timer > 3)
             {
+                if (!PlayedThree)
+                {
+                    this.GetComponent<AudioSource>().PlayOneShot(CountdownClip);
+                    PlayedThree = true;
+                }
+
                 this.GetComponent<SpriteRenderer>().sprite = Three;
             }
             else if (timer < 3 && timer > 2)
             {
+                if (!PlayedTwo)
+                {
+                    this.GetComponent<AudioSource>().PlayOneShot(CountdownClip);
+                    PlayedTwo = true;
+                }
+
                 this.GetComponent<SpriteRenderer>().sprite = Two;
             }
             else if (timer < 2 && timer > 1)
             {
+                if (!PlayedOne)
+                {
+                    this.GetComponent<AudioSource>().PlayOneShot(CountdownClip);
+                    PlayedOne = true;
+                }
+
                 this.GetComponent<SpriteRenderer>().sprite = One;
             }
             else if (timer < 1 && timer > 0)
             {
+                if (!PlayedGo)
+                {
+                    this.GetComponent<AudioSource>().PlayOneShot(GoClip);
+                    PlayedGo = true;
+                }
+
                 this.GetComponent<SpriteRenderer>().sprite = Go;
             }
             else if (timer < 0)

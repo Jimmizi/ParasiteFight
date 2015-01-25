@@ -57,7 +57,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ProjectileHit: {fileID: 19800000, guid: a67c878a7c525fb4ab566154a07678bf, type: 2}
-  Terrain: {fileID: 100000, guid: dbe56b840c8f31e44944bd3e295c8a59, type: 2}
+  GrenadeExplodeSound: {fileID: 8300000, guid: e57d5cdadaa184f19929552f4aefc3bf, type: 3}
+  GrenadeFloorHit: {fileID: 8300000, guid: 3a33187339ec649db97f95f7bf096338, type: 3}
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

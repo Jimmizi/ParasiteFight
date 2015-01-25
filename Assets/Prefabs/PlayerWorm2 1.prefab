@@ -122,6 +122,7 @@ GameObject:
   - 114: {fileID: 11400004}
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400000}
+  - 82: {fileID: 8200000}
   m_Layer: 2
   m_Name: PlayerWorm2 1
   m_TagString: Player
@@ -136,7 +137,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .492347568, y: .0480656736, z: 0}
+  m_LocalPosition: {x: .686452329, y: .0860626698, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400008}
@@ -258,6 +259,64 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_Size: {x: .644234776, y: .969812036}
   m_Center: {x: -.0199999996, y: .0500000007}
+--- !u!82 &8200000
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100014}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!95 &9500000
 Animator:
   serializedVersion: 3
@@ -299,6 +358,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: cccb5606127cb4f8a9091d578f9a16ad, type: 3}
   - {fileID: 21300000, guid: 471beea104df8af47bf4590c04c6f1e9, type: 3}
   - {fileID: 21300000, guid: 64d6b5e8d71534ff5869413102dad1e9, type: 3}
+  Gib1: {fileID: 8300000, guid: 494da5dbe287f456aa3f5e53e2f47a80, type: 3}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -310,6 +370,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e09a3b143de12d478ec22fcb25151d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Gib1: {fileID: 100000, guid: 4e640982ec30bb94ca0642c6b6a549ee, type: 2}
+  GrenadeThrow: {fileID: 8300000, guid: 9a7824cb0e127470a841d410f5964c93, type: 3}
+  GunShoot: {fileID: 8300000, guid: eccac50b27b51459780781de8343959e, type: 3}
   WeaponPrefabs:
   - {fileID: 100000, guid: f3700e15a1feeff49838c8a65b0c0133, type: 2}
   - {fileID: 100000, guid: 9029ff1075a988f46b88f16c7336ec98, type: 2}

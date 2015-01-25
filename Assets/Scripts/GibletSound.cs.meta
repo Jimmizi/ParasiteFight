@@ -1,0 +1,9 @@
+fileFormatVersion: 2
+guid: a81368fe5c4116244b002f123e561c5a
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - Gib1: {fileID: 8300000, guid: 494da5dbe287f456aa3f5e53e2f47a80, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 

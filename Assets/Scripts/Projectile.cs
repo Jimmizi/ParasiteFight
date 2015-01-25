@@ -8,6 +8,9 @@ public class Projectile : MonoBehaviour {
     Type projectileType;
 
     public ParticleSystem ProjectileHit;
+
+    public AudioClip GrenadeExplodeSound, GrenadeFloorHit;
+
     GameObject Terrain;
 
     float yDrag = 0;
@@ -20,6 +23,8 @@ public class Projectile : MonoBehaviour {
     //copy the sprite
     public void Initialise(Sprite spr, string pType, float damage, float radius, float speed)
     {
+        source = gameObject.AddComponent<AudioSource>();
+
         if (pType == "GRENADE")
         {
             projectileType = Type.GRENADE;
@@ -80,6 +85,11 @@ public class Projectile : MonoBehaviour {
             {
                 this.rigidbody2D.AddForce(new Vector2(0, 100 - yDrag));
 
+                source.volume = (1 - yDrag / 100) / 2;
+
+                if(hit.collider.tag != "Player")
+                source.PlayOneShot(GrenadeFloorHit);
+
                 if (yDrag < 100)
                     yDrag += 25;
             }
@@ -122,7 +132,6 @@ public class Projectile : MonoBehaviour {
 
         Instantiate(ProjectileHit, this.transform.position, Quaternion.identity);
 		Explode();
-
         Destroy(this.gameObject);
     }
 
