@@ -1,6 +1,8 @@
 fileFormatVersion: 2
 guid: fc1e2241e3de86d45a0a42897c1a2550
 TextureImporter:
+  fileIDToRecycleName:
+    21300000: stock-vector--d-text-play-logo-15105811
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
