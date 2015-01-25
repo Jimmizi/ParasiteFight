@@ -73,30 +73,30 @@ class Leaf
 //
 public class GibbingSystem : MonoBehaviour
 {
-    public List<Sprite> GibletSprites = new List<Sprite>(4);
+    private List<Sprite> GibletSprites = new List<Sprite>(4);
     private List<GameObject> m_giblets = new List<GameObject>();
-    public AudioClip Gib1;
 
     // Use this for initialization
     void Start()
     {
+        Transform[] bodyParts = this.GetComponentsInChildren<Transform>();
+
+        for (int i = 1; i < bodyParts.Length; i++)
+        {
+            if (bodyParts[i].gameObject.gameObject.GetComponent<SpriteRenderer>())
+            {
+                SpriteRenderer renderer = bodyParts[i].gameObject.gameObject.GetComponent<SpriteRenderer>();
+                GibletSprites.Add(renderer.sprite);
+                Debug.Log("Added a giblet");
+            }
+        }
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        PlayerControl playerController = null;
-
-        if (this.GetComponent<PlayerControl>())
-        {
-            playerController = this.GetComponent<PlayerControl>();
-
-            if (playerController.playerHealth <= 0)
-            {
-                
-            }
-        }
+        
     }
 
     public void SplitToGibs2()
@@ -167,11 +167,6 @@ public class GibbingSystem : MonoBehaviour
                 m_giblets.Add(giblet);
             }
         }
-    }
-
-    void OnCollisionEnter2D(Collision2D col)
-    {
-      
     }
 
 
