@@ -108,6 +108,7 @@ GameObject:
   - 114: {fileID: 11400000}
   - 114: {fileID: 11400004}
   - 82: {fileID: 8200000}
+  - 114: {fileID: 11400006}
   m_Layer: 2
   m_Name: PlayerWorm
   m_TagString: Player
@@ -331,6 +332,7 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
   m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -342,12 +344,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e70dc8bc3ebe9874c9e8e846bc96e856, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GibletSprites:
-  - {fileID: 21300000, guid: 4195a706f71094cfa8c45fbe7103103f, type: 3}
-  - {fileID: 21300000, guid: cccb5606127cb4f8a9091d578f9a16ad, type: 3}
-  - {fileID: 21300000, guid: 471beea104df8af47bf4590c04c6f1e9, type: 3}
-  - {fileID: 21300000, guid: 64d6b5e8d71534ff5869413102dad1e9, type: 3}
-  Gib1: {fileID: 8300000, guid: 494da5dbe287f456aa3f5e53e2f47a80, type: 3}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -388,6 +384,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cf28a460d1934b5b8f26f46b142a6bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11400006
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03cc900f043e7814cbc38875beb93e4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Mass: 1
+  DragCoefficient: -10
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

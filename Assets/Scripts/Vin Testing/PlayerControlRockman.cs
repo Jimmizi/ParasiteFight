@@ -37,7 +37,7 @@ public class PlayerControlRockman : MonoBehaviour
             {
                 if (Input.GetKey(KeyCode.Space))
                 {
-                    rigidbody2D.AddForce(new Vector2(0.0f, 50.0f));
+                    rigidbody2D.AddForce(new Vector2(0.0f, 10.0f));
                 }
             }
         }
