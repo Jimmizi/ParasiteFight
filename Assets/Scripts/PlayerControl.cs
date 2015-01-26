@@ -117,30 +117,10 @@ public class PlayerControl : MonoBehaviour
 
         jumpLimitTimer += Time.deltaTime;
         //rigidbody2D.AddForce(new Vector2(Input.GetAxis("C" + playerNumber + " Horizontal") * 6, 0.0f));
-	
-		if (!joystick)
-		{
-			if (Input.GetKeyDown(KeyCode.A))
-			{
-				goingRight = false;
-				force = 10.0f;
 
-			}
-			else if (Input.GetKeyDown(KeyCode.D))
-			{
-				goingRight = true;
-				force = -10.0f;
-			}
-
-			this.transform.position = Vector3.Lerp(this.transform.position, this.transform.position + new Vector3(force, 0, 0),
-			                                        Time.deltaTime * 15)  ;
-		}
-		else 
-		{
 			float velo =  Input.GetAxis("C" + playerNumber + " Horizontal") * playerSpeed * Time.deltaTime;
         	this.transform.position = Vector3.Lerp(this.transform.position, this.transform.position + new Vector3(velo * 10, 0, 0),
                                                 Time.deltaTime * 15);
-		}
 
         if (Input.GetAxis("C" + playerNumber + " Horizontal") > 0.1f )
             goingRight = true;
