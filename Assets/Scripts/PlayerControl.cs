@@ -59,6 +59,8 @@ public class PlayerControl : MonoBehaviour
     private AudioSource source;
     public AudioClip[] clip;
 
+	bool joystick = false;
+	float force;
     void Awake()
     {
         source = GetComponent<AudioSource>();
@@ -81,6 +83,11 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+						if (Input.GetJoystickNames ().Length > 0) {
+						joystick = true;
+				
+				}
+	
         for (int i = 0; i < clip.Length; i++)
         {
             audio.clip = clip[i];
@@ -108,17 +115,36 @@ public class PlayerControl : MonoBehaviour
             Destroy(gameObject);
         }
 
-
         jumpLimitTimer += Time.deltaTime;
         //rigidbody2D.AddForce(new Vector2(Input.GetAxis("C" + playerNumber + " Horizontal") * 6, 0.0f));
+	
+		if (!joystick)
+		{
+			if (Input.GetKeyDown(KeyCode.A))
+			{
+				goingRight = false;
+				force = 10.0f;
 
-        float velo = Input.GetAxis("C" + playerNumber + " Horizontal") * playerSpeed * Time.deltaTime;
-        this.transform.position = Vector3.Lerp(this.transform.position, this.transform.position + new Vector3(velo * 10, 0, 0),
+			}
+			else if (Input.GetKeyDown(KeyCode.D))
+			{
+				goingRight = true;
+				force = -10.0f;
+			}
+
+			this.transform.position = Vector3.Lerp(this.transform.position, this.transform.position + new Vector3(force, 0, 0),
+			                                        Time.deltaTime * 15)  ;
+		}
+		else 
+		{
+			float velo =  Input.GetAxis("C" + playerNumber + " Horizontal") * playerSpeed * Time.deltaTime;
+        	this.transform.position = Vector3.Lerp(this.transform.position, this.transform.position + new Vector3(velo * 10, 0, 0),
                                                 Time.deltaTime * 15);
+		}
 
-        if (Input.GetAxis("C" + playerNumber + " Horizontal") > 0.1f)
+        if (Input.GetAxis("C" + playerNumber + " Horizontal") > 0.1f )
             goingRight = true;
-        else if (Input.GetAxis("C" + playerNumber + " Horizontal") < -0.1f)
+		else if (Input.GetAxis("C" + playerNumber + " Horizontal") < -0.1f)
             goingRight = false;
 
         if (goingRight)
@@ -133,8 +159,7 @@ public class PlayerControl : MonoBehaviour
             Body.transform.localScale = new Vector3(-1, 1, 1);
         }
 
-
-        if (PressedA() && jumpLimitTimer > 0.65f)
+		if (PressedA() && jumpLimitTimer > 0.65f || Input.GetKeyDown(KeyCode.W) && jumpLimitTimer > 0.65)
         {
             if (m_velocity.y < 0.01f && m_velocity.y > -0.01f)
             {
@@ -148,7 +173,7 @@ public class PlayerControl : MonoBehaviour
             }
         }
 
-        if (PressedB())
+        if (PressedB() || Input.GetKeyDown(KeyCode.LeftShift))
         {
             if (weapon == 0)
                 weapon = 1;
@@ -185,7 +210,7 @@ public class PlayerControl : MonoBehaviour
         }
 
         //Shoot
-        if (PressedRB() || PressedRT())
+        if (PressedRB() || PressedRT() || Input.GetKeyDown(KeyCode.Space))
         {
             if (weapon == 0)
             {
@@ -240,14 +265,13 @@ public class PlayerControl : MonoBehaviour
     Vector3 Movement()
     {
         Vector3 force = Vector3.zero;
-
-        if (Input.GetKey(KeyCode.D))
-            force.x = 150.0f;
-        else if (Input.GetKey(KeyCode.A))
-            force.x = -150.0f;
-        else
-            force = Vector3.zero;
-
+	
+						if (Input.GetKey (KeyCode.D))
+								force.x = 150.0f;
+						else if (Input.GetKey (KeyCode.A))
+								force.x = -150.0f;
+						else
+								force = Vector3.zero;
         return force;
     }
 

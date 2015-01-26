@@ -214,6 +214,7 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
   m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!4 &486006847
 Transform:
   m_ObjectHideFlags: 0
@@ -290,7 +291,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 19800000, guid: 3c82ce6cf8f42d44fb781736b3e7fef3, type: 2}
       propertyPath: InitialModule.startColor.maxColor.rgba
-      value: 150995199
+      value: 83886335
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 3c82ce6cf8f42d44fb781736b3e7fef3, type: 2}
       propertyPath: m_RootOrder
@@ -339,6 +340,10 @@ Prefab:
     - target: {fileID: 400000, guid: 3e2932bed47d9c840b6c4e63c0ebc9c3, type: 2}
       propertyPath: m_RootMapOrder
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: 3e2932bed47d9c840b6c4e63c0ebc9c3, type: 2}
+      propertyPath: InitialModule.startColor.maxColor.rgba
+      value: 3254779904
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3e2932bed47d9c840b6c4e63c0ebc9c3, type: 2}
@@ -993,7 +998,7 @@ ParticleSystem:
         rgba: 4294967295
       maxColor:
         serializedVersion: 2
-        rgba: 4278190080
+        rgba: 3254779904
       minMaxState: 0
     startSize:
       scalar: 10
@@ -2156,7 +2161,7 @@ ParticleSystem:
         rgba: 4294967295
       maxColor:
         serializedVersion: 2
-        rgba: 150995199
+        rgba: 68161782
       minMaxState: 0
     startSize:
       scalar: 10
@@ -3137,7 +3142,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 19800000, guid: 3c82ce6cf8f42d44fb781736b3e7fef3, type: 2}
       propertyPath: InitialModule.startColor.maxColor.rgba
-      value: 150995199
+      value: 68161782
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 3c82ce6cf8f42d44fb781736b3e7fef3, type: 2}
       propertyPath: m_RootOrder
@@ -3339,9 +3344,9 @@ AudioSource:
   m_GameObject: {fileID: 1430327435}
   m_Enabled: 1
   serializedVersion: 3
-  m_audioClip: {fileID: 8300000, guid: 2568740153a1d584a9b5143b5d84b0f2, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 291faef9b87d248ec8be9be6516809d8, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: .349999994
+  m_Volume: 1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -6025,7 +6030,7 @@ ParticleSystem:
         rgba: 4294967295
       maxColor:
         serializedVersion: 2
-        rgba: 150995199
+        rgba: 83886335
       minMaxState: 0
     startSize:
       scalar: 10

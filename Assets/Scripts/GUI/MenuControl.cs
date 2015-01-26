@@ -32,7 +32,7 @@ public class MenuControl : MonoBehaviour {
 	
 	void Update () 
     {
-        if (Input.GetButtonDown("C1 A"))
+        if (Input.GetButtonDown("C1 A") || Input.GetKeyDown(KeyCode.Space))
         {
              Application.LoadLevel("main");
         }
